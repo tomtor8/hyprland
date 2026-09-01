@@ -54,32 +54,21 @@ hl.env("HYPRCURSOR_SIZE", "28")
 ---- LOOK AND FEEL ----
 -----------------------
 
--- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
+require("colors-pastel")
+
 hl.config({
     general = {
         gaps_in = 5,
         gaps_out = 10,
-
         border_size = 3,
-
-        col = {
-            active_border = "rgba(636a72ff)",
-            inactive_border = "rgba(252b35ff)",
-        },
-
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = true,
-
-        -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
-        allow_tearing = false,
-
         layout = "dwindle",
     },
 
     decoration = {
         rounding = 6,
         rounding_power = 6,
-
         -- Change transparency of focused and unfocused windows
         active_opacity = 1.0,
         inactive_opacity = 1.0,
@@ -90,10 +79,9 @@ hl.config({
             enabled = true,
             range = 25,
             render_power = 4,
-            color = "rgba(000000ee)",
-            offset = {0, 0},
+            offset = { 0, 0 },
             scale = 1.0,
-            sharp = false
+            sharp = false,
         },
 
         blur = {
@@ -104,27 +92,14 @@ hl.config({
         },
     },
 
-    animations = {
-        enabled = true,
-    },
-
     layout = {
-        single_window_aspect_ratio = {4, 3},
+        single_window_aspect_ratio = { 4, 3 },
     },
 
     cursor = {
-        hide_on_key_press = true
+        hide_on_key_press = true,
     },
-})
-
-hl.config({
     group = {
-        col = {
-            border_active = "rgba(4a5057cc)",          -- Active unlocked border
-            border_inactive = "rgba(1d212a99)",        -- Inactive border
-            border_locked_active = "rgba(8ca6dbb3)",   -- Active locked border
-            border_locked_inactive = "rgba(c49d82b3)", -- Inactive locked border
-        },
         groupbar = {
             enabled = true,
             font_family = "Lexend",
@@ -132,22 +107,12 @@ hl.config({
             font_weight_active = "bold",
             rounding = 6,
             round_only_edges = false,
-            -- text_color = "rgba(e2e8f0ff)",             -- Active title text
-            text_color = "rgba(adc6ffff)",             -- Active title text
-            text_color_inactive = "rgba(7c849bff)",    -- Inactive title text
             indicator_height = 16,
             indicator_gap = -15,
             blur = true,
-            col = {
-                active = "rgba(1d212aee)",             -- Matches border_active
-                inactive = "rgba(1d212aee)",           -- Matches border_inactive
-                locked_active = "rgba(1d212aee)",      -- Matches border_locked_active
-                locked_inactive = "rgba(1d212aee)",    -- Matches border_locked_inactive
-            }
         },
-    }
+    },
 })
-
 
 require("animations")
 
@@ -200,7 +165,7 @@ hl.config({
         disable_hyprland_logo = true, -- If true disables the random hyprland logo / anime girl background. :(
         middle_click_paste = false,
         enable_swallow = true,
-        swallow_regex = "^(foot|kitty)$"
+        swallow_regex = "^(foot|kitty)$",
     },
 })
 
@@ -252,50 +217,50 @@ require("keybindings")
 hl.workspace_rule({
     workspace = "special:yazi-scratchpad",
     on_created_empty = "foot --app-id yazi-scratch -e yazi",
-    animation = "slide"
+    animation = "slide",
 })
 
 hl.window_rule({
     name = "yazi-scratch",
     match = {
-        class = "^yazi-scratch$"
+        class = "^yazi-scratch$",
     },
     float = true,
     size = { "(monitor_w * 0.6)", "(monitor_h * 0.7)" },
-    animation = "slide"
+    animation = "slide",
 })
 
 hl.workspace_rule({
     workspace = "special:foot-scratchpad",
     on_created_empty = "foot --app-id foot-scratch",
-    animation = "slide"
+    animation = "slide",
 })
 
 hl.window_rule({
     name = "foot-scratch",
     match = {
-        class = "^foot-scratch$"
+        class = "^foot-scratch$",
     },
     float = true,
     size = { "(monitor_w * 0.6)", "(monitor_h * 0.7)" },
-    animation = "slide"
+    animation = "slide",
 })
 
 hl.workspace_rule({
     workspace = "special:note-scratchpad",
     on_created_empty = "foot --app-id note-scratch -e nvim ~/Documents/notepad.md 2>/dev/null",
     animation = "slide",
-    no_rounding = false
+    no_rounding = false,
 })
 
 hl.window_rule({
     name = "note-scratch",
     match = {
-        class = "^note-scratch$"
+        class = "^note-scratch$",
     },
     float = true,
     size = { "(monitor_w * 0.6)", "(monitor_h * 0.7)" },
-    animation = "slide"
+    animation = "slide",
 })
 
 local suppressMaximizeRule = hl.window_rule({
@@ -321,7 +286,6 @@ hl.window_rule({
 
     no_focus = true,
 })
-
 
 hl.window_rule({
     match = {

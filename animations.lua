@@ -1,3 +1,8 @@
+hl.config({
+    animations = {
+        enabled = true
+    }
+})
 -- Curves and Beziers
 hl.curve(
     "easeOutQuint",
