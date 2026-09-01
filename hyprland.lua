@@ -1,8 +1,4 @@
-------------------
----- MONITORS ----
-------------------
-
--- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- Monitors {{{1
 hl.monitor({
     output = "",
     mode = "preferred",
@@ -10,32 +6,18 @@ hl.monitor({
     scale = "auto",
 })
 
--------------------
----- AUTOSTART ----
--------------------
-
--- Autostart necessary processes (like notifications daemons, status bars, etc.)
--- Or execute your favorite apps at launch like this:
---
+-- Autostart {{{1
 hl.on("hyprland.start", function()
     hl.exec_cmd("~/.config/hypr/restart-hyprland-portals.fish")
     hl.exec_cmd("noctalia")
 end)
 
--------------------------------
----- ENVIRONMENT VARIABLES ----
--------------------------------
-
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
-
+-- Environment variables {{{1
 hl.env("XCURSOR_THEME", "Bibata-Modern-Ice")
 hl.env("XCURSOR_SIZE", "28")
 hl.env("HYPRCURSOR_SIZE", "28")
 
------------------------
------ PERMISSIONS -----
------------------------
-
+-- Permissions {{{1
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Permissions/
 -- Please note permission changes here require a Hyprland restart and are not applied on-the-fly
 -- for security reasons
@@ -50,91 +32,12 @@ hl.env("HYPRCURSOR_SIZE", "28")
 -- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
 -- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
 
------------------------
----- LOOK AND FEEL ----
------------------------
-
+-- Look {{{1
 require("colors-pastel")
-
-hl.config({
-    general = {
-        gaps_in = 5,
-        gaps_out = 10,
-        border_size = 3,
-        -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = true,
-        layout = "dwindle",
-    },
-
-    decoration = {
-        rounding = 6,
-        rounding_power = 6,
-        -- Change transparency of focused and unfocused windows
-        active_opacity = 1.0,
-        inactive_opacity = 1.0,
-        dim_inactive = false,
-        dim_strength = 0.4,
-
-        shadow = {
-            enabled = true,
-            range = 25,
-            render_power = 4,
-            offset = { 0, 0 },
-            scale = 1.0,
-            sharp = false,
-        },
-
-        blur = {
-            enabled = true,
-            size = 5,
-            passes = 1,
-            vibrancy = 0.1696,
-        },
-    },
-
-    layout = {
-        single_window_aspect_ratio = { 4, 3 },
-    },
-
-    cursor = {
-        hide_on_key_press = true,
-    },
-    group = {
-        groupbar = {
-            enabled = true,
-            font_family = "Lexend",
-            font_size = 14,
-            font_weight_active = "bold",
-            rounding = 6,
-            round_only_edges = false,
-            indicator_height = 16,
-            indicator_gap = -15,
-            blur = true,
-        },
-    },
-})
-
+require("look-standard")
 require("animations")
 
--- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
--- "Smart gaps" / "No gaps when only"
--- uncomment all if you wish to use that.
--- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
--- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
--- hl.window_rule({
---     name  = "no-gaps-wtv1",
---     match = { float = false, workspace = "w[tv1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
--- hl.window_rule({
---     name  = "no-gaps-f1",
---     match = { float = false, workspace = "f[1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
-
--- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
+-- Layout config {{{1
 hl.config({
     dwindle = {
         preserve_split = true, -- You probably want this
@@ -155,10 +58,7 @@ hl.config({
     },
 })
 
-----------------
-----  MISC  ----
-----------------
-
+-- Miscellaneous {{{1
 hl.config({
     misc = {
         force_default_wallpaper = 0, -- Set to 0 or 1 to disable the anime mascot wallpapers
@@ -169,10 +69,7 @@ hl.config({
     },
 })
 
----------------
----- INPUT ----
----------------
-
+-- Keyboard, mouse, trackpad {{{1
 hl.config({
     input = {
         kb_layout = "us,sk,es",
@@ -180,44 +77,28 @@ hl.config({
         kb_model = "",
         kb_options = "grp:shifts_toggle,caps:escape",
         kb_rules = "",
-
         follow_mouse = 1,
-
         sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
-
         touchpad = {
-            natural_scroll = false,
+            natural_scroll = true,
         },
     },
 })
 
 hl.gesture({
     fingers = 3,
-    direction = "horizontal",
+    direction = "vertical",
     action = "workspace",
 })
 
--- Example per-device config
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
-hl.device({
-    name = "epic-mouse-v1",
-    sensitivity = -0.5,
-})
-
+-- Keybindings {{{1
 require("keybindings")
 
---------------------------------
----- WINDOWS AND WORKSPACES ----
---------------------------------
-
--- Example window rules that are useful
-
--- Workspace rules
+-- Window and Workspace rules {{{1
 
 hl.workspace_rule({
     workspace = "special:yazi-scratchpad",
     on_created_empty = "foot --app-id yazi-scratch -e yazi",
-    animation = "slide",
 })
 
 hl.window_rule({
@@ -227,13 +108,13 @@ hl.window_rule({
     },
     float = true,
     size = { "(monitor_w * 0.6)", "(monitor_h * 0.7)" },
-    animation = "slide",
+    animation = "slide left",
+    workspace = "^special:yazi-scratchpad$"
 })
 
 hl.workspace_rule({
     workspace = "special:foot-scratchpad",
     on_created_empty = "foot --app-id foot-scratch",
-    animation = "slide",
 })
 
 hl.window_rule({
@@ -243,14 +124,13 @@ hl.window_rule({
     },
     float = true,
     size = { "(monitor_w * 0.6)", "(monitor_h * 0.7)" },
-    animation = "slide",
+    animation = "slide left",
+    workspace = "^special:foot-scratchpad$"
 })
 
 hl.workspace_rule({
     workspace = "special:note-scratchpad",
     on_created_empty = "foot --app-id note-scratch -e nvim ~/Documents/notepad.md 2>/dev/null",
-    animation = "slide",
-    no_rounding = false,
 })
 
 hl.window_rule({
@@ -260,7 +140,8 @@ hl.window_rule({
     },
     float = true,
     size = { "(monitor_w * 0.6)", "(monitor_h * 0.7)" },
-    animation = "slide",
+    animation = "slide left",
+    workspace = "^special:note-scratchpad$"
 })
 
 local suppressMaximizeRule = hl.window_rule({
@@ -312,6 +193,34 @@ hl.window_rule({
     size = { "(monitor_w * 0.5)", "(monitor_h * 0.6)" },
 })
 
+-- Hyprland-run windowrule
+hl.window_rule({
+    name = "move-hyprland-run",
+    match = { class = "hyprland-run" },
+
+    move = "20 monitor_h-120",
+    float = true,
+})
+
+-- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
+-- "Smart gaps" / "No gaps when only"
+-- uncomment all if you wish to use that.
+-- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
+-- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
+-- hl.window_rule({
+--     name  = "no-gaps-wtv1",
+--     match = { float = false, workspace = "w[tv1]" },
+--     border_size = 0,
+--     rounding    = 0,
+-- })
+-- hl.window_rule({
+--     name  = "no-gaps-f1",
+--     match = { float = false, workspace = "f[1]" },
+--     border_size = 0,
+--     rounding    = 0,
+-- })
+
+-- Layer Rules {{{1
 hl.layer_rule({
     match = { namespace = "^launcher$" },
     dim_around = true,
@@ -326,13 +235,4 @@ hl.layer_rule({
     ignore_alpha = 0.5,
     blur = true,
     blur_popups = true,
-})
-
--- Hyprland-run windowrule
-hl.window_rule({
-    name = "move-hyprland-run",
-    match = { class = "hyprland-run" },
-
-    move = "20 monitor_h-120",
-    float = true,
 })
