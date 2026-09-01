@@ -6,7 +6,11 @@ local ipc = "noctalia msg "
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Close Windows & Exit Hyprland {{{1
-hl.bind(mainMod .. " + Q", hl.dsp.window.close(), {description = "Close Window"})
+hl.bind(
+    mainMod .. " + Q",
+    hl.dsp.window.close(),
+    { description = "Close Window" }
+)
 hl.bind(
     mainMod .. " + ALT + M",
     hl.dsp.exec_cmd(
@@ -179,9 +183,21 @@ hl.bind(
 -- end)
 
 -- Window groups & tabs {{{1
-hl.bind(mainMod .. " + ALT + G", hl.dsp.group.toggle())
-hl.bind(mainMod .. " + ALT + L", hl.dsp.group.next())
-hl.bind(mainMod .. " + ALT + H", hl.dsp.group.prev())
+hl.bind(
+    mainMod .. " + ALT + G",
+    hl.dsp.group.toggle(),
+    { description = "Toggle Group" }
+)
+hl.bind(
+    mainMod .. " + ALT + L",
+    hl.dsp.group.next(),
+    { description = "Focus Next Window in Group" }
+)
+hl.bind(
+    mainMod .. " + ALT + H",
+    hl.dsp.group.prev(),
+    { description = "Focus Previous Window in Group" }
+)
 
 -- Focus Workspaces & Move Windows to Workspaces {{{1
 -- Switch workspaces with CTRL + [0-9]
@@ -249,7 +265,7 @@ hl.bind(mainMod .. " + ALT + Q", function()
             follow = false,
         }))
     end
-end)
+end, { description = "Minimize Single Window" })
 
 -- Mouse Binds {{{1
 -- Scroll through existing workspaces with mainMod + scroll
@@ -304,7 +320,11 @@ hl.bind(
 )
 
 -- Resize Windows Submaps {{{1
-hl.bind(mainMod .. " + R", hl.dsp.submap("resize"))
+hl.bind(
+    mainMod .. " + R",
+    hl.dsp.submap("resize"),
+    { description = "Resize Window Submap" }
+)
 
 -- Start a submap called "resize".
 hl.define_submap("resize", function()
