@@ -12,7 +12,7 @@ hl.bind(
     { description = "Close Window" }
 )
 hl.bind(
-    mainMod .. " + ALT + M",
+    mainMod .. " + ALT + X",
     hl.dsp.exec_cmd(
         "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"
     ),
@@ -92,29 +92,6 @@ hl.bind(
     hl.dsp.exec_cmd(ipc .. "panel-toggle session"),
     { description = "Session Panel" }
 )
-hl.bind(
-    mainMod .. " + CTRL + B",
-    hl.dsp.exec_cmd(ipc .. "bar-toggle"),
-    { description = "Status Bar Toggle" }
-)
-
--- Layout Toggles {{{1
-hl.bind(
-    mainMod .. " + ALT + P",
-    hl.dsp.window.pseudo(),
-    { description = "Pseudotile" }
-)
-hl.bind(
-    mainMod .. " + ALT + J",
-    hl.dsp.layout("togglesplit"),
-    { description = "Split Toggle for Dwindle" }
-)
-hl.bind(
-    mainMod .. " + ALT + F",
-    hl.dsp.window.float({ action = "toggle" }),
-    { description = "Float Window Toggle" }
-)
-
 -- Switch Layouts
 -- -- hyprctl eval 'hl.config({ general = { layout = "master" } })' for scripting
 -- hl.bind("ALT + SHIFT + M", function()
@@ -183,11 +160,6 @@ hl.bind(
 -- end)
 
 -- Window groups & tabs {{{1
-hl.bind(
-    mainMod .. " + ALT + G",
-    hl.dsp.group.toggle(),
-    { description = "Toggle Group" }
-)
 hl.bind(
     mainMod .. " + ALT + L",
     hl.dsp.group.next(),
@@ -269,8 +241,16 @@ end, { description = "Minimize Single Window" })
 
 -- Mouse Binds {{{1
 -- Scroll through existing workspaces with mainMod + scroll
-hl.bind("CTRL + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind("CTRL + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(
+    mainMod .. " + mouse_down",
+    hl.dsp.focus({ workspace = "e+1" }),
+    { repeating = false }
+)
+hl.bind(
+    mainMod .. " + mouse_up",
+    hl.dsp.focus({ workspace = "e-1" }),
+    { repeating = false }
+)
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
@@ -385,6 +365,51 @@ hl.define_submap("screenshots", "reset", function()
     hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
+-- Toggles Submaps {{{1
+hl.bind(
+    mainMod .. " + T",
+    hl.dsp.submap("toggles"),
+    { description = "Various Toggles" }
+)
+
+hl.define_submap("toggles", "reset", function()
+    hl.bind(
+        "m",
+        hl.dsp.window.fullscreen({ action = "toggle", mode = "maximized" }),
+        { repeating = false, description = "Maximize Window" }
+    )
+    hl.bind(
+        "s",
+        hl.dsp.window.fullscreen({ action = "toggle", mode = "fullscreen" }),
+        { repeating = false, description = "Fullscreen Window" }
+    )
+    hl.bind(
+        "f",
+        hl.dsp.window.float({ action = "toggle" }),
+        { description = "Float Window" }
+    )
+    hl.bind("g", hl.dsp.group.toggle(), { description = "Toggle Group" })
+    hl.bind(
+        "l",
+        hl.dsp.group.lock({ action = "toggle" }),
+        { description = "Group Lock" }
+    )
+    hl.bind(
+        "b",
+        hl.dsp.exec_cmd(ipc .. "bar-toggle"),
+        { description = "Status Bar Toggle" }
+    )
+    -- Layout Toggles {{{1
+    hl.bind("p", hl.dsp.window.pseudo(), { description = "Pseudotile" })
+    hl.bind(
+        "d",
+        hl.dsp.layout("togglesplit"),
+        { description = "Split Toggle for Dwindle" }
+    )
+
+    hl.bind("escape", hl.dsp.submap("reset"))
+end)
+
 -- Resize and Float Windows Submaps {{{1
 -- Making Floating Windows and Resizing them
 hl.bind(
@@ -392,7 +417,6 @@ hl.bind(
     hl.dsp.submap("float_windows"),
     { description = "Float and Resize" }
 )
--- 5.1 Resize and Float Submaps
 -- automatically reset the submap using "reset" here
 -- width and height as decimals
 hl.define_submap("float_windows", "reset", function()

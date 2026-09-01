@@ -88,13 +88,16 @@ hl.config({
 
         shadow = {
             enabled = true,
-            range = 10,
-            render_power = 3,
-            color = "rgba(000000C0)",
+            range = 25,
+            render_power = 4,
+            color = "rgba(000000ee)",
+            offset = {0, 0},
+            scale = 1.0,
+            sharp = false
         },
 
         blur = {
-            enabled = false,
+            enabled = true,
             size = 5,
             passes = 1,
             vibrancy = 0.1696,
@@ -103,7 +106,6 @@ hl.config({
 
     animations = {
         enabled = true,
-        workspace_wraparound = true,
     },
 
     layout = {
@@ -131,16 +133,16 @@ hl.config({
             rounding = 6,
             round_only_edges = false,
             -- text_color = "rgba(e2e8f0ff)",             -- Active title text
-            text_color = "rgba(e2e8f0ff)",             -- Active title text
-            text_color_inactive = "rgba(7c849b99)",    -- Inactive title text
+            text_color = "rgba(adc6ffff)",             -- Active title text
+            text_color_inactive = "rgba(7c849bff)",    -- Inactive title text
             indicator_height = 16,
             indicator_gap = -15,
-            blur = false,
+            blur = true,
             col = {
-                active = "rgba(4a5057ff)",             -- Matches border_active
-                inactive = "rgba(1d212aff)",           -- Matches border_inactive
-                locked_active = "rgba(4a5057ff)",      -- Matches border_locked_active
-                locked_inactive = "rgba(1d212aff)",    -- Matches border_locked_inactive
+                active = "rgba(1d212aee)",             -- Matches border_active
+                inactive = "rgba(1d212aee)",           -- Matches border_inactive
+                locked_active = "rgba(1d212aee)",      -- Matches border_locked_active
+                locked_inactive = "rgba(1d212aee)",    -- Matches border_locked_inactive
             }
         },
     }
@@ -348,7 +350,7 @@ hl.window_rule({
 
 hl.layer_rule({
     match = { namespace = "^launcher$" },
-    dim_around = true
+    dim_around = true,
 })
 
 hl.layer_rule({
@@ -358,8 +360,8 @@ hl.layer_rule({
     },
     no_anim = true,
     ignore_alpha = 0.5,
-    blur = false,
-    blur_popups = false,
+    blur = true,
+    blur_popups = true,
 })
 
 -- Hyprland-run windowrule
