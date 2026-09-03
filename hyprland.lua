@@ -1,9 +1,20 @@
+-- Local Settings {{{1
+local my_scale = 1.5
+-- local my_theme = "pastel"
+
+local has_local, local_settings = pcall(require, "local-settings")
+if has_local then
+    if local_settings.scale then
+        my_scale = local_settings.scale
+    end
+end
+
 -- Monitors {{{1
 hl.monitor({
     output = "",
     mode = "preferred",
     position = "auto",
-    scale = "auto",
+    scale = my_scale,
 })
 
 -- Autostart {{{1
@@ -83,12 +94,27 @@ hl.config({
             natural_scroll = true,
         },
     },
+
+    gestures = {
+        workspace_swipe_cancel_ratio = 0.1,
+        -- workspace_swipe_min_speed_to_force = 10
+    }
 })
 
 hl.gesture({
     fingers = 3,
     direction = "vertical",
     action = "workspace",
+})
+
+hl.gesture({
+    -- 2..9
+    fingers = 4,
+    -- up|down|left|righ
+    direction = "up",
+    action = function()
+        hl.exec_cmd("foot")
+    end,
 })
 
 -- Keybindings {{{1
