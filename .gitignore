@@ -1,0 +1,7 @@
+# create ~/.config/hypr/local-settings.lua
+# return {
+#   -- just an example
+#   theme = "ayu-dark"
+# }
+# on each machine use your local theme or settings
+local-settings.lua
