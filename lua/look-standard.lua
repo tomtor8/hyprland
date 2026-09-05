@@ -5,15 +5,15 @@ function M.setup(cfg)
     -- e.g. cfg.scale
     hl.config({
         general = {
-            gaps_in = cfg.inner_gaps,
-            gaps_out = 10,
+            gaps_in = cfg.gaps_inner,
+            gaps_out = cfg.gaps_outer,
             border_size = 3,
             -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
             resize_on_border = true,
-            layout = "dwindle",
+            layout = cfg.layout_global,
         },
         decoration = {
-            rounding = 6,
+            rounding = cfg.corner_radius,
             rounding_power = 6,
             -- Change transparency of focused and unfocused windows
             active_opacity = 1.0,
@@ -47,7 +47,7 @@ function M.setup(cfg)
                 font_family = "Lexend",
                 font_size = 14,
                 font_weight_active = "bold",
-                rounding = 6,
+                rounding = cfg.corner_radius,
                 round_only_edges = false,
                 indicator_height = 16,
                 indicator_gap = -15,

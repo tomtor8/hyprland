@@ -79,6 +79,14 @@ local commands = {
         [[hyprctl eval 'hl.config({ decoration = { dim_inactive = true, dim_strength = 0.75 } })']],
     },
     {
+        "󱁐  Gaps Around Windows Remove",
+        [=[sed -i -E 's/(gaps_(inner|outer)[[:space:]]*=[[:space:]]*)[0-9]+(,?)/\10\3/' ~/.config/hypr/lua/local-settings.lua]=],
+    },
+    {
+        "󱍕  Group Lock Toggle",
+        [[hyprctl dispatch 'hl.dsp.group.lock("toggle")']],
+    },
+    {
         "  Keybindings Cheatsheet",
         "noctalia msg panel-toggle kenn/keybind-cheatsheet:cheatsheet",
     },
@@ -125,10 +133,6 @@ local commands = {
     {
         "  Layout Master",
         [[hyprctl reload && hyprctl eval 'hl.config({ general = { layout = "master" } })']],
-    },
-    {
-        "󱍕  Group Lock Toggle",
-        [[hyprctl dispatch 'hl.dsp.group.lock("toggle")']],
     },
     { "󱍕  Lockscreen Widgets Edit", "noctalia msg lockscreen-widgets-edit" },
     {

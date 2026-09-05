@@ -1,10 +1,13 @@
 -- Define all your shared settings, state, and loaded local overrides here
 -- Default settings
 local M = {
+    corner_radius = 6,
     scale = 1.5,
     theme = "pastel",
-    inner_gaps = 5,
+    gaps_inner = 5,
+    gaps_outer = 10,
     blur_global = false,
+    layout_global = "dwindle",
 }
 
 -- Load optional local overrides
