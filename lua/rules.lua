@@ -121,6 +121,7 @@ function M.setup(cfg)
         workspace = "2",
         persistent = true,
         default_name = "Term",
+        layout = "lua:grid"
     })
     hl.workspace_rule({
         workspace = "3",
