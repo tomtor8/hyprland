@@ -29,7 +29,7 @@ function M.setup(cfg)
                 sharp = false,
             },
             blur = {
-                enabled = true,
+                enabled = cfg.blur_global,
                 size = 5,
                 passes = 1,
                 vibrancy = 0.1696,
@@ -51,7 +51,7 @@ function M.setup(cfg)
                 round_only_edges = false,
                 indicator_height = 16,
                 indicator_gap = -15,
-                blur = true,
+                blur = false,
             },
         },
     })

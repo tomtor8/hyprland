@@ -43,7 +43,7 @@ local ok, theme = pcall(require, theme_module)
 if ok and type(theme.setup) == "function" then
     theme.setup(cfg)
 else
-    require("lua.colors-ayu").setup(cfg) --default fallback
+    require("lua.colors-pastel").setup(cfg) --default fallback
 end
 
 require("lua.look-standard").setup(cfg)

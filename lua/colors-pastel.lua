@@ -6,30 +6,30 @@ function M.setup(cfg)
     hl.config({
         general = {
             col = {
-                active_border = "rgba(636a72ff)",
-                inactive_border = "rgba(252b35ff)",
+                active_border = "rgba(b4befedd)",   -- Lavender
+                inactive_border = "rgba(313244dd)", -- Surface0
             },
         },
         decoration = {
             shadow = {
-                color = "rgba(000000ee)",
+                color = "rgba(11111bee)",           -- Crust
             },
         },
         group = {
             col = {
-                border_active = "rgba(4a5057cc)", -- Active unlocked border
-                border_inactive = "rgba(1d212a99)", -- Inactive border
-                border_locked_active = "rgba(8ca6dbb3)", -- Active locked border
-                border_locked_inactive = "rgba(c49d82b3)", -- Inactive locked border
+                border_active = "rgba(b4befedd)",          -- Lavender
+                border_inactive = "rgba(313244dd)",        -- Surface0
+                border_locked_active = "rgba(fab387aa)",   -- Peach
+                border_locked_inactive = "rgba(f9e2afaa)", -- Yellow
             },
             groupbar = {
-                text_color = "rgba(adc6ffff)", -- Active title text
-                text_color_inactive = "rgba(7c849bff)", -- Inactive title text
+                text_color = "rgba(cdd6f4ff)",          -- Text
+                text_color_inactive = "rgba(a6adc8ff)", -- Subtext0
                 col = {
-                    active = "rgba(1d212aee)", -- Matches border_active
-                    inactive = "rgba(1d212aee)", -- Matches border_inactive
-                    locked_active = "rgba(1d212aee)", -- Matches border_locked_active
-                    locked_inactive = "rgba(1d212aee)", -- Matches border_locked_inactive
+                    active = "rgba(1e1e2eff)",          -- Base
+                    inactive = "rgba(181825ff)",        -- Mantle
+                    locked_active = "rgba(1e1e2eff)",   -- Base
+                    locked_inactive = "rgba(181825ff)", -- Mantle
                 },
             },
         },
