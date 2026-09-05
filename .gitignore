@@ -4,4 +4,5 @@
 #   theme = "ayu-dark"
 # }
 # on each machine use your local theme or settings
+lua/local-settings.lua
 local-settings.lua

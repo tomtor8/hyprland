@@ -1,25 +1,17 @@
--- Local Settings {{{1
-local my_scale = 1.5
--- local my_theme = "pastel"
-
-local has_local, local_settings = pcall(require, "local-settings")
-if has_local then
-    if local_settings.scale then
-        my_scale = local_settings.scale
-    end
-end
+-- Load Local Settings {{{1
+local cfg = require("lua.config")
 
 -- Monitors {{{1
 hl.monitor({
     output = "",
     mode = "preferred",
     position = "auto",
-    scale = my_scale,
+    scale = cfg.scale,
 })
 
 -- Autostart {{{1
 hl.on("hyprland.start", function()
-    hl.exec_cmd("~/.config/hypr/restart-hyprland-portals.fish")
+    hl.exec_cmd("~/.config/hypr/scripts/restart-hyprland-portals.fish")
     hl.exec_cmd("noctalia")
 end)
 
@@ -44,9 +36,9 @@ hl.env("HYPRCURSOR_SIZE", "28")
 -- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
 
 -- Look {{{1
-require("colors-pastel")
-require("look-standard")
-require("animations")
+require("lua.colors-pastel").setup(cfg)
+require("lua.look-standard").setup(cfg)
+require("lua.animations").setup(cfg)
 
 -- Layout config {{{1
 hl.config({
@@ -118,7 +110,7 @@ hl.gesture({
 })
 
 -- Keybindings {{{1
-require("keybindings")
+require("lua.keybindings").setup(cfg)
 
 -- Window and Workspace rules {{{1
-require("rules")
+require("lua.rules").setup(cfg)
