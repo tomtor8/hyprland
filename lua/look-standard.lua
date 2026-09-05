@@ -36,7 +36,7 @@ function M.setup(cfg)
             },
         },
         layout = {
-            single_window_aspect_ratio = { 4, 3 },
+            -- single_window_aspect_ratio = { 4, 4 },
         },
         cursor = {
             hide_on_key_press = true,
