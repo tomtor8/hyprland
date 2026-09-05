@@ -98,6 +98,13 @@ local commands = {
         ),
     },
     {
+        "󰋁  Layout Grid Active Workspace",
+        string.format(
+            [[hyprctl eval 'hl.workspace_rule({ workspace = "%s", layout = "lua:grid"})']],
+            workspace_id
+        ),
+    },
+    {
         "  Layout Master Active Workspace",
         string.format(
             [[hyprctl eval 'hl.workspace_rule({ workspace = "%s", layout = "master"})']],
@@ -120,19 +127,24 @@ local commands = {
     },
     {
         "  Layout Dwindle",
-        [[hyprctl reload && hyprctl eval 'hl.config({ general = { layout = "dwindle" } })']],
+        -- [[hyprctl reload && hyprctl eval 'hl.config({ general = { layout = "dwindle" } })']],
+        [=[sed -i -E '/layout_global/s/"[^"]*"/"dwindle"/' ~/.config/hypr/lua/local-settings.lua]=],
+    },
+    {
+        "󰋁  Layout Grid",
+        [=[sed -i -E '/layout_global/s/"[^"]*"/"lua:grid"/' ~/.config/hypr/lua/local-settings.lua]=],
     },
     {
         "󰹟  Layout Monocle",
-        [[hyprctl reload && hyprctl eval 'hl.config({ general = { layout = "monocle" } })']],
+        [=[sed -i -E '/layout_global/s/"[^"]*"/"monocle"/' ~/.config/hypr/lua/local-settings.lua]=],
     },
     {
         "  Layout Scrolling",
-        [[hyprctl reload && hyprctl eval 'hl.config({ general = { layout = "scrolling" } })']],
+        [=[sed -i -E '/layout_global/s/"[^"]*"/"scrolling"/' ~/.config/hypr/lua/local-settings.lua]=],
     },
     {
         "  Layout Master",
-        [[hyprctl reload && hyprctl eval 'hl.config({ general = { layout = "master" } })']],
+        [=[sed -i -E '/layout_global/s/"[^"]*"/"master"/' ~/.config/hypr/lua/local-settings.lua]=],
     },
     { "󱍕  Lockscreen Widgets Edit", "noctalia msg lockscreen-widgets-edit" },
     {
