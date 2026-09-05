@@ -67,6 +67,15 @@ function M.setup(cfg)
         size = { "(monitor_w * 0.5)", "(monitor_h * 0.6)" },
     })
 
+    hl.window_rule({
+        match = {
+            class = "^kew$",
+        },
+        float = true,
+        workspace = "4 silent",
+        size = { "(monitor_w * 0.3)", "(monitor_h * 0.8)" },
+    })
+
     -- Hyprland window rules {{{2
     hl.window_rule({
         name = "move-hyprland-run",
@@ -98,6 +107,35 @@ function M.setup(cfg)
         },
 
         no_focus = true,
+    })
+
+    -- Workspace rules {{{1
+
+    hl.workspace_rule({
+        workspace = "1",
+        persistent = true,
+        default_name = "Web",
+        layout = "master"
+    })
+    hl.workspace_rule({
+        workspace = "2",
+        persistent = true,
+        default_name = "Term",
+    })
+    hl.workspace_rule({
+        workspace = "3",
+        persistent = true,
+        default_name = "Read",
+    })
+    hl.workspace_rule({
+        workspace = "4",
+        persistent = true,
+        default_name = "Media",
+    })
+    hl.workspace_rule({
+        workspace = "5",
+        persistent = true,
+        default_name = "Other",
     })
 
     -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/

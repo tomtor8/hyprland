@@ -142,7 +142,7 @@ local commands = {
     { "  Noctalia Settings Toggle", "noctalia msg settings-toggle" },
     {
         "󰑓  Reload Config",
-        "mmsg dispatch reload_config && notify-send -i dialog-information 'Mango' 'Config Reloaded' ",
+        "hyprctl reload",
     },
     { "  Scratchpad Status", "mmsg dispatch spawn,fish -c scratchpads" },
     {
@@ -171,6 +171,10 @@ local commands = {
     {
         "󰔊  Text-to-Speech Mexican Spanish - Jorge",
         [[fish -c "edge-playback --text (wl-paste | string collect) -v es-MX-JorgeNeural || notify-send 'TTS Error'"]],
+    },
+    {
+        "󰋱  Window Center",
+        [[hyprctl dispatch 'hl.dsp.window.center()']],
     },
     {
         "󰖲  Window Float",

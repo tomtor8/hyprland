@@ -194,6 +194,18 @@ function M.setup(cfg)
     end
 
     hl.bind(
+        "CTRL + SHIFT + down",
+        hl.dsp.window.move({ workspace = "+1" }),
+        { description = "Move Window to Next Workspace" }
+    )
+
+    hl.bind(
+        "CTRL + SHIFT + up",
+        hl.dsp.window.move({ workspace = "-1" }),
+        { description = "Move Window to Previous Workspace" }
+    )
+
+    hl.bind(
         "CTRL + down",
         hl.dsp.focus({ workspace = "+1" }),
         { description = "Focus Workspace Next" }
