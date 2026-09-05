@@ -5,7 +5,7 @@ function M.setup(cfg)
     -- e.g. cfg.scale
     hl.config({
         general = {
-            gaps_in = 5,
+            gaps_in = cfg.inner_gaps,
             gaps_out = 10,
             border_size = 3,
             -- Set to true to enable resizing windows by clicking and dragging on borders and gaps

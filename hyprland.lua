@@ -36,7 +36,16 @@ hl.env("HYPRCURSOR_SIZE", "28")
 -- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
 
 -- Look {{{1
-require("lua.colors-pastel").setup(cfg)
+-- Dynamically require the theme module based on cfg.theme
+local theme_module = "lua.colors-" .. cfg.theme
+local ok, theme = pcall(require, theme_module)
+
+if ok and type(theme.setup) == "function" then
+    theme.setup(cfg)
+else
+    require("lua.colors-ayu").setup(cfg) --default fallback
+end
+
 require("lua.look-standard").setup(cfg)
 require("lua.animations").setup(cfg)
 
@@ -90,7 +99,7 @@ hl.config({
     gestures = {
         workspace_swipe_cancel_ratio = 0.1,
         -- workspace_swipe_min_speed_to_force = 10
-    }
+    },
 })
 
 hl.gesture({
