@@ -129,17 +129,8 @@ function M.setup(cfg)
         { description = "Focus Window Down" }
     )
 
-    local function get_ws_layout_name()
-        local ws = hl.get_active_workspace()
-        if not ws then
-            return
-        end
-        -- if ws true, return tiled_layout string else ""
-        return ws and ws.tiled_layout or ""
-    end
-
     hl.bind("SUPER + H", function()
-        if get_ws_layout_name() == "monocle" then
+        if funs.get_ws_props("layout") == "monocle" then
             hl.dispatch(hl.dsp.layout("cycleprev"))
         else
             hl.dispatch(hl.dsp.focus({ direction = "left" }))
@@ -147,11 +138,45 @@ function M.setup(cfg)
     end)
 
     hl.bind("SUPER + L", function()
-        if get_ws_layout_name() == "monocle" then
+        if funs.get_ws_props("layout") == "monocle" then
             hl.dispatch(hl.dsp.layout("cyclenext"))
         else
             hl.dispatch(hl.dsp.focus({ direction = "right" }))
         end
+    end)
+
+    -- Active Workspace Layout Submaps {{{1
+
+    hl.bind(mainMod .. " + A", function()
+        hl.dispatch(
+            hl.dsp.exec_cmd(
+                [[notify-send -i dialog-information -t 20000 "Active WS Layouts" "d - Dwindle\nm - Master\no - Monocle\ns - Scrolling"]]
+            )
+        )
+        hl.dispatch(hl.dsp.submap("active_ws_layouts"))
+    end, { description = "Active Workspace Layouts" })
+    -- automatically reset the submap using "reset" here
+    hl.define_submap("active_ws_layouts", "reset", function()
+        local t = {
+            -- key: keybind, value: layout, description
+            ["m"] = { "master", "Master Layout" },
+            ["d"] = { "dwindle", "Dwindle Layout" },
+            ["o"] = { "monocle", "Monocle Layout" },
+            ["s"] = { "scrolling", "Scrolling Layout" },
+        }
+
+        for k, v in pairs(t) do
+            hl.bind(k, function()
+                hl.workspace_rule({
+                    -- get active workspace id
+                    workspace = funs.get_ws_props("id") or "",
+                    layout = v[1],
+                    { repeating = false, description = v[2] },
+                })
+            end)
+        end
+
+        hl.bind("escape", hl.dsp.submap("reset"))
     end)
 
     -- Swap Windows {{{1
@@ -243,7 +268,10 @@ function M.setup(cfg)
 
     -- Scrolling Layout Binds {{{1
     hl.bind(mainMod .. " + bracketleft", hl.dsp.layout("consume_or_expel prev"))
-    hl.bind(mainMod .. " + bracketright", hl.dsp.layout("consume_or_expel next"))
+    hl.bind(
+        mainMod .. " + bracketright",
+        hl.dsp.layout("consume_or_expel next")
+    )
     hl.bind(mainMod .. " + comma", hl.dsp.layout("consume"))
     hl.bind(mainMod .. " + period", hl.dsp.layout("expel"))
     hl.bind(mainMod .. " + equal", hl.dsp.layout("colresize +0.1"))
@@ -351,36 +379,15 @@ function M.setup(cfg)
         { locked = true }
     )
 
-    -- Layout Specific Keymaps
-    -- lua:manual layout
-    hl.bind(
-        mainMod .. " + 1",
-        hl.dsp.layout("splitv"),
-        { description = "Vertical Split in Manual Layout" }
-    )
-
-    hl.bind(
-        mainMod .. " + 2",
-        hl.dsp.layout("splith"),
-        { description = "Horizontal Split in Manual Layout" }
-    )
-
-    hl.bind(
-        mainMod .. " + 3",
-        hl.dsp.layout("promote"),
-        { description = "Promote Window in Manual Layout" }
-    )
-    hl.bind(
-        mainMod .. " + 4",
-        hl.dsp.layout("rotate"),
-        { description = "Rotate Window in Manual Layout" }
-    )
     -- Resize Windows Submaps {{{1
-    hl.bind(
-        mainMod .. " + R",
-        hl.dsp.submap("resize"),
-        { description = "Resize Window Submap" }
-    )
+    hl.bind(mainMod .. " + R", function()
+        hl.dispatch(
+            hl.dsp.exec_cmd(
+                [[notify-send -i dialog-information -t 20000 "Resize Window" "h - Left\nj - Down\nk - Up\nl - Right\nEsc - Cancel"]]
+            )
+        )
+        hl.dispatch(hl.dsp.submap("resize"))
+    end, { description = "Resize Window Submap" })
 
     -- Start a submap called "resize".
     hl.define_submap("resize", function()
@@ -406,11 +413,14 @@ function M.setup(cfg)
     end)
 
     -- Screenshot Submaps {{{1
-    hl.bind(
-        mainMod .. " + S",
-        hl.dsp.submap("screenshots"),
-        { description = "Screenshots" }
-    )
+    hl.bind(mainMod .. " + S", function()
+        hl.dispatch(
+            hl.dsp.exec_cmd(
+                [[notify-send -i dialog-information -t 20000 "Screenshot" "f - Fullscreen\nl - OCR Keep Lines\no - OCR No Lines\nr - Region"]]
+            )
+        )
+        hl.dispatch(hl.dsp.submap("screenshots"))
+    end, { description = "Screenshots" })
     -- automatically reset the submap using "reset" here
     hl.define_submap("screenshots", "reset", function()
         local t = {
@@ -442,11 +452,14 @@ function M.setup(cfg)
     end)
 
     -- Toggles Submaps {{{1
-    hl.bind(
-        mainMod .. " + T",
-        hl.dsp.submap("toggles"),
-        { description = "Various Toggles" }
-    )
+    hl.bind(mainMod .. " + T", function()
+        hl.dispatch(
+            hl.dsp.exec_cmd(
+                [[notify-send -i dialog-information -t 20000 "Toggles" "b - Status Bar\nd - Dwindle Togglesplit\nf - Float\ng - Group\nl - Group Lock\nm - Maximize\np - Pseudotile\ns - fullscreen"]]
+            )
+        )
+        hl.dispatch(hl.dsp.submap("toggles"))
+    end, { description = "Various Toggles" })
 
     hl.define_submap("toggles", "reset", function()
         hl.bind(
@@ -475,7 +488,7 @@ function M.setup(cfg)
             hl.dsp.exec_cmd(ipc .. "bar-toggle"),
             { description = "Status Bar Toggle" }
         )
-        -- Layout Toggles {{{1
+        -- Layout Toggles {{{2
         hl.bind("p", hl.dsp.window.pseudo(), { description = "Pseudotile" })
         hl.bind(
             "d",
@@ -488,11 +501,14 @@ function M.setup(cfg)
 
     -- Resize and Float Windows Submaps {{{1
     -- Making Floating Windows and Resizing them
-    hl.bind(
-        mainMod .. " + F",
-        hl.dsp.submap("float_windows"),
-        { description = "Float and Resize" }
-    )
+    hl.bind(mainMod .. " + F", function()
+        hl.dispatch(
+            hl.dsp.exec_cmd(
+                [[notify-send -i dialog-information -t 20000 "Floating Window Sizes" "1 - 50x60\n2 - 60x70\n3 - 70x80\n4 - 80x90\n5 - 90x90\n6 - 50x93"]]
+            )
+        )
+        hl.dispatch(hl.dsp.submap("float_windows"))
+    end, { description = "Float and Resize" })
     -- automatically reset the submap using "reset" here
     -- width and height as decimals
     hl.define_submap("float_windows", "reset", function()

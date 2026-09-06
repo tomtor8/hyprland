@@ -25,4 +25,19 @@ function M.float_and_resize(width_perc, height_perc)
     hl.dispatch(hl.dsp.window.resize({ x = width, y = height }))
     hl.dispatch(hl.dsp.window.center())
 end
+---Get workspace property as string
+---@param prop string Property name, e.g. id, layout
+---@return string|nil
+function M.get_ws_props(prop)
+    local ws = hl.get_active_workspace()
+    if not ws then
+        return ""
+    end
+    if prop == "id" then
+        return tostring(ws.id) or ""
+    elseif prop == "layout" then
+        return ws.tiled_layout or ""
+    end
+end
+
 return M
