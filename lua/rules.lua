@@ -114,50 +114,23 @@ function M.setup(cfg)
     hl.workspace_rule({
         workspace = "1",
         persistent = true,
-        default_name = "Web",
-        layout = "master"
     })
     hl.workspace_rule({
         workspace = "2",
         persistent = true,
-        default_name = "Term",
-        layout = "lua:grid"
     })
     hl.workspace_rule({
         workspace = "3",
         persistent = true,
-        default_name = "Read",
-        layout = "lua:manual"
     })
     hl.workspace_rule({
         workspace = "4",
         persistent = true,
-        default_name = "Media",
-        layout = "lua:cen_master_cols"
     })
     hl.workspace_rule({
         workspace = "5",
         persistent = true,
-        default_name = "Other",
     })
-
-    -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
-    -- "Smart gaps" / "No gaps when only"
-    -- uncomment all if you wish to use that.
-    -- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
-    -- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
-    -- hl.window_rule({
-    --     name  = "no-gaps-wtv1",
-    --     match = { float = false, workspace = "w[tv1]" },
-    --     border_size = 0,
-    --     rounding    = 0,
-    -- })
-    -- hl.window_rule({
-    --     name  = "no-gaps-f1",
-    --     match = { float = false, workspace = "f[1]" },
-    --     border_size = 0,
-    --     rounding    = 0,
-    -- })
 
     -- Layer Rules {{{1
     hl.layer_rule({
@@ -172,7 +145,7 @@ function M.setup(cfg)
         },
         no_anim = true,
         ignore_alpha = 0.5,
-        blur = true,
+        blur = false,
         blur_popups = true,
     })
 end

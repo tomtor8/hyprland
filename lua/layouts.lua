@@ -2,8 +2,8 @@ local M = {}
 
 local layout_modules = {
     "lua.layouts.manual",
-    "lua.layouts.centered-master-column",
-    "lua.layouts.grid-mango",
+    "lua.layouts.columns",
+    "lua.layouts.grid",
 }
 
 function M.setup(cfg)
@@ -24,7 +24,8 @@ function M.setup(cfg)
     -- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
     hl.config({
         scrolling = {
-            fullscreen_on_one_column = true,
+            fullscreen_on_one_column = false,
+            focus_fit_method = 1, -- 1 fit, 0 center
         },
     })
     -- }}}

@@ -72,11 +72,11 @@ function M.setup(cfg)
         hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"),
         { description = "Noctalia Launcher" }
     )
-    hl.bind(
-        mainMod .. " + comma",
-        hl.dsp.exec_cmd(ipc .. "settings-toggle"),
-        { description = "Noctalia Settings" }
-    )
+    -- hl.bind(
+    --     mainMod .. " + comma",
+    --     hl.dsp.exec_cmd(ipc .. "settings-toggle"),
+    --     { description = "Noctalia Settings" }
+    -- )
     hl.bind(
         mainMod .. " + V",
         hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"),
@@ -108,16 +108,16 @@ function M.setup(cfg)
     -- end)
 
     -- Focus Windows, {{{1
-    hl.bind(
-        mainMod .. " + H",
-        hl.dsp.focus({ direction = "left" }),
-        { description = "Focus Window Left" }
-    )
-    hl.bind(
-        mainMod .. " + L",
-        hl.dsp.focus({ direction = "right" }),
-        { description = "Focus Window Right" }
-    )
+    -- hl.bind(
+    --     mainMod .. " + H",
+    --     hl.dsp.focus({ direction = "left" }),
+    --     { description = "Focus Window Left" }
+    -- )
+    -- hl.bind(
+    --     mainMod .. " + L",
+    --     hl.dsp.focus({ direction = "right" }),
+    --     { description = "Focus Window Right" }
+    -- )
     hl.bind(
         mainMod .. " + K",
         hl.dsp.focus({ direction = "up" }),
@@ -128,6 +128,31 @@ function M.setup(cfg)
         hl.dsp.focus({ direction = "down" }),
         { description = "Focus Window Down" }
     )
+
+    local function get_ws_layout_name()
+        local ws = hl.get_active_workspace()
+        if not ws then
+            return
+        end
+        -- if ws true, return tiled_layout string else ""
+        return ws and ws.tiled_layout or ""
+    end
+
+    hl.bind("SUPER + H", function()
+        if get_ws_layout_name() == "monocle" then
+            hl.dispatch(hl.dsp.layout("cycleprev"))
+        else
+            hl.dispatch(hl.dsp.focus({ direction = "left" }))
+        end
+    end)
+
+    hl.bind("SUPER + L", function()
+        if get_ws_layout_name() == "monocle" then
+            hl.dispatch(hl.dsp.layout("cyclenext"))
+        else
+            hl.dispatch(hl.dsp.focus({ direction = "right" }))
+        end
+    end)
 
     -- Swap Windows {{{1
     hl.bind(
@@ -215,6 +240,16 @@ function M.setup(cfg)
         hl.dsp.focus({ workspace = "-1" }),
         { description = "Focus Workspace Previous" }
     )
+
+    -- Scrolling Layout Binds {{{1
+    hl.bind(mainMod .. " + bracketleft", hl.dsp.layout("consume_or_expel prev"))
+    hl.bind(mainMod .. " + bracketright", hl.dsp.layout("consume_or_expel next"))
+    hl.bind(mainMod .. " + comma", hl.dsp.layout("consume"))
+    hl.bind(mainMod .. " + period", hl.dsp.layout("expel"))
+    hl.bind(mainMod .. " + equal", hl.dsp.layout("colresize +0.1"))
+    hl.bind(mainMod .. " + minus", hl.dsp.layout("colresize -0.1"))
+    hl.bind(mainMod .. " + SHIFT + bracketleft", hl.dsp.layout("swapcol l"))
+    hl.bind(mainMod .. " + SHIFT + bracketright", hl.dsp.layout("swapcol r"))
 
     -- Scratchpads: Special Workspaces {{{1
     hl.bind(
