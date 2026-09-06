@@ -127,11 +127,13 @@ function M.setup(cfg)
         workspace = "3",
         persistent = true,
         default_name = "Read",
+        layout = "lua:manual"
     })
     hl.workspace_rule({
         workspace = "4",
         persistent = true,
         default_name = "Media",
+        layout = "lua:cen_master_cols"
     })
     hl.workspace_rule({
         workspace = "5",

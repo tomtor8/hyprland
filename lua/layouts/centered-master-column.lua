@@ -68,8 +68,8 @@ hl.layout.register("cen_master_cols", {
             target:place({
                 x = left_area.x,
                 y = left_area.y + (idx - 1) * left_h_base,
-                width = left_area.w,
-                height = h,
+                w = left_area.w,
+                h = h,
             })
         end
 
@@ -84,8 +84,8 @@ hl.layout.register("cen_master_cols", {
             target:place({
                 x = right_area.x,
                 y = right_area.y + (idx - 1) * right_h_base,
-                width = right_area.w,
-                height = h,
+                w = right_area.w,
+                h = h,
             })
         end
     end,

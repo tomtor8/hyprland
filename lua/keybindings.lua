@@ -316,6 +316,30 @@ function M.setup(cfg)
         { locked = true }
     )
 
+    -- Layout Specific Keymaps
+    -- lua:manual layout
+    hl.bind(
+        mainMod .. " + 1",
+        hl.dsp.layout("splitv"),
+        { description = "Vertical Split in Manual Layout" }
+    )
+
+    hl.bind(
+        mainMod .. " + 2",
+        hl.dsp.layout("splith"),
+        { description = "Horizontal Split in Manual Layout" }
+    )
+
+    hl.bind(
+        mainMod .. " + 3",
+        hl.dsp.layout("promote"),
+        { description = "Promote Window in Manual Layout" }
+    )
+    hl.bind(
+        mainMod .. " + 4",
+        hl.dsp.layout("rotate"),
+        { description = "Rotate Window in Manual Layout" }
+    )
     -- Resize Windows Submaps {{{1
     hl.bind(
         mainMod .. " + R",
