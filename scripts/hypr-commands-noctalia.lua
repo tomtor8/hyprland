@@ -97,13 +97,13 @@ local commands = {
             workspace_id
         ),
     },
-    {
-        "󰋁  Layout Grid Active Workspace",
-        string.format(
-            [[hyprctl eval 'hl.workspace_rule({ workspace = "%s", layout = "lua:grid"})']],
-            workspace_id
-        ),
-    },
+    -- {
+    --     "󰋁  Layout Grid Active Workspace",
+    --     string.format(
+    --         [[hyprctl eval 'hl.workspace_rule({ workspace = "%s", layout = "lua:grid"})']],
+    --         workspace_id
+    --     ),
+    -- },
     {
         "  Layout Master Active Workspace",
         string.format(
@@ -130,10 +130,10 @@ local commands = {
         -- [[hyprctl reload && hyprctl eval 'hl.config({ general = { layout = "dwindle" } })']],
         [=[sed -i -E '/layout_global/s/"[^"]*"/"dwindle"/' ~/.config/hypr/lua/local-settings.lua]=],
     },
-    {
-        "󰋁  Layout Grid",
-        [=[sed -i -E '/layout_global/s/"[^"]*"/"lua:grid"/' ~/.config/hypr/lua/local-settings.lua]=],
-    },
+    -- {
+    --     "󰋁  Layout Grid",
+    --     [=[sed -i -E '/layout_global/s/"[^"]*"/"lua:grid"/' ~/.config/hypr/lua/local-settings.lua]=],
+    -- },
     {
         "󰹟  Layout Monocle",
         [=[sed -i -E '/layout_global/s/"[^"]*"/"monocle"/' ~/.config/hypr/lua/local-settings.lua]=],
@@ -174,6 +174,18 @@ local commands = {
     {
         "󰹑  Screenshot Screen and Annotate",
         [[fish -c "sleep 1; grim - | satty -f - --copy-command wl-copy -o '~/Pictures/Screenshots/annotated-%Y%m%d-%H%M%S.png'"]],
+    },
+    {
+        "󰘞  Scrolling: Center Focused Column",
+        [[hyprctl dispatch 'hl.dsp.layout("center")']],
+    },
+    {
+        "  Scrolling: Swap Columns to Left",
+        [[hyprctl dispatch 'hl.dsp.layout("swapcol l")']],
+    },
+    {
+        "  Scrolling: Swap Columns to Right",
+        [[hyprctl dispatch 'hl.dsp.layout("swapcol r")']],
     },
     { "  Status Bar Toggle", "noctalia msg bar-toggle" },
     {
