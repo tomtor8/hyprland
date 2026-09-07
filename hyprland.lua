@@ -60,6 +60,7 @@ hl.config({
         middle_click_paste = false,
         enable_swallow = true,
         swallow_regex = "^(foot|kitty)$",
+        font_family = "Lexend"
     },
 })
 
