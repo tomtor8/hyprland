@@ -47,7 +47,15 @@ function M.setup(cfg)
             class = "dev.noctalia.Noctalia",
         },
         float = true,
-        size = { 1080, 920 },
+        size = { "(monitor_w * 0.5)", "(monitor_h * 0.8)" },
+    })
+
+    hl.window_rule({
+        match = {
+            class = "io.github.cboxdoerfer.FSearch",
+        },
+        float = true,
+        size = { "(monitor_w * 0.5)", "(monitor_h * 0.6)" },
     })
 
     hl.window_rule({
