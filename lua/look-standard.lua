@@ -20,6 +20,7 @@ function M.setup(cfg)
             inactive_opacity = 1.0,
             dim_inactive = false,
             dim_strength = 0.4,
+            dim_special = 0.4,
             shadow = {
                 enabled = true,
                 range = 25,
@@ -36,7 +37,7 @@ function M.setup(cfg)
             },
         },
         layout = {
-            -- single_window_aspect_ratio = { 4, 4 },
+            single_window_aspect_ratio = { 4, 3 },
         },
         cursor = {
             hide_on_key_press = true,

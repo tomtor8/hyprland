@@ -146,7 +146,7 @@ function M.setup(cfg)
         no_anim = true,
         ignore_alpha = 0.5,
         blur = false,
-        blur_popups = true,
+        blur_popups = false,
     })
 end
 
