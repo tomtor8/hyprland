@@ -53,17 +53,22 @@ function M.setup(cfg)
     hl.bind(
         mainMod .. " + M",
         hl.dsp.exec_cmd("~/Code/lua/fuzzel_scripts/find-music-kew.lua"),
-        { description = "Kew Music Select" }
+        { description = "Kew Music Select in Fuzzel" }
     )
     hl.bind(
         mainMod .. " + C",
-        hl.dsp.exec_cmd("~/Code/lua/fuzzel_scripts/color-picker-hypr.lua"),
-        { description = "Color Picker" }
+        hl.dsp.exec_cmd("~/.config/hypr/scripts/color-picker-hypr.lua"),
+        { description = "Color Picker in Fuzzel" }
     )
     hl.bind(
         mainMod .. " + G",
-        hl.dsp.exec_cmd("~/Code/lua/fuzzel_scripts/buku-fuzzel.lua"),
-        { description = "Buku Web Bookmarks" }
+        hl.dsp.exec_cmd("~/.config/hypr/scripts/buku-fuzzel-hypr.lua"),
+        { description = "Buku Web Bookmarks in Fuzzel" }
+    )
+    hl.bind(
+        mainMod .. " + X",
+        hl.dsp.exec_cmd("~/.config/hypr/scripts/powermenu-hypr-noctalia.lua"),
+        { description = "PowerMenu in Fuzzel" }
     )
 
     -- Noctalia Keybindings {{{1
@@ -91,11 +96,6 @@ function M.setup(cfg)
         mainMod .. " + N",
         hl.dsp.exec_cmd(ipc .. "panel-toggle noctalia/notes:panel"),
         { description = "Noctalia Notes" }
-    )
-    hl.bind(
-        mainMod .. " + X",
-        hl.dsp.exec_cmd(ipc .. "panel-toggle session"),
-        { description = "Session Panel" }
     )
     -- Switch Layouts
     -- -- hyprctl eval 'hl.config({ general = { layout = "master" } })' for scripting
