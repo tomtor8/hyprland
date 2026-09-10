@@ -18,6 +18,10 @@ function M.setup(cfg)
             name = "note",
             cmd = "foot --app-id note-scratch -e nvim ~/Documents/notepad.md 2>/dev/null",
         },
+        {
+            name = "music",
+            cmd = "foot --app-id music-scratch -e cmus",
+        },
     }
 
     for _, scratch in ipairs(scratchpads) do

@@ -298,6 +298,12 @@ function M.setup(cfg)
         { description = "Open Note Scratchpad" }
     )
 
+    hl.bind(
+        mainMod .. " + ALT + M",
+        hl.dsp.workspace.toggle_special("music-scratchpad"),
+        { description = "Open Music Scratchpad" }
+    )
+
     -- Minimize window {{{1
     -- Works only for one window
     hl.bind(mainMod .. " + ALT + Q", function()
