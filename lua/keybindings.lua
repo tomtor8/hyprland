@@ -77,11 +77,11 @@ function M.setup(cfg)
         hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"),
         { description = "Noctalia Launcher" }
     )
-    -- hl.bind(
-    --     mainMod .. " + comma",
-    --     hl.dsp.exec_cmd(ipc .. "settings-toggle"),
-    --     { description = "Noctalia Settings" }
-    -- )
+    hl.bind(
+        "CTRL + Space",
+        hl.dsp.exec_cmd(ipc .. "panel-toggle nightwatch75/file-search:panel"),
+        { description = "File Search in Noctalia" }
+    )
     hl.bind(
         mainMod .. " + V",
         hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"),
