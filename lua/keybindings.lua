@@ -66,9 +66,19 @@ function M.setup(cfg)
         { description = "Buku Web Bookmarks in Fuzzel" }
     )
     hl.bind(
+        mainMod .. " + W",
+        hl.dsp.exec_cmd("~/.local/share/snippets/scripts/one-liner-to-fuzzel.fish"),
+        { description = "One-liners" }
+    )
+    hl.bind(
         mainMod .. " + X",
         hl.dsp.exec_cmd("~/.config/hypr/scripts/powermenu-hypr-noctalia.lua"),
         { description = "PowerMenu in Fuzzel" }
+    )
+    hl.bind(
+        mainMod .. " + Z",
+        hl.dsp.exec_cmd("~/.local/share/snippets/scripts/snip-to-fuzzel.fish"),
+        { description = "Snippets" }
     )
 
     -- Noctalia Keybindings {{{1

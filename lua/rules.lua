@@ -48,7 +48,7 @@ function M.setup(cfg)
     -- Application rules {{{2
     hl.window_rule({
         match = {
-            class = "dev.noctalia.Noctalia",
+            class = "^(dev.noctalia.Noctalia)$",
         },
         float = true,
         size = { "(monitor_w * 0.5)", "(monitor_h * 0.8)" },
@@ -56,7 +56,7 @@ function M.setup(cfg)
 
     hl.window_rule({
         match = {
-            class = "io.github.cboxdoerfer.FSearch",
+            class = "^(io.github.cboxdoerfer.FSearch|foot-snip|org.gnome.Nautilus)$",
         },
         float = true,
         size = { "(monitor_w * 0.5)", "(monitor_h * 0.6)" },
@@ -69,14 +69,6 @@ function M.setup(cfg)
         },
         float = true,
         size = { "(monitor_w * 0.3)", "(monitor_h * 0.3)" },
-    })
-
-    hl.window_rule({
-        match = {
-            class = "org.gnome.Nautilus",
-        },
-        float = true,
-        size = { "(monitor_w * 0.5)", "(monitor_h * 0.6)" },
     })
 
     hl.window_rule({
