@@ -9,6 +9,7 @@ function M.setup(cfg)
     local fileManager = "nautilus"
     local ipc = "noctalia msg "
     local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+    local home = os.getenv("HOME")
 
     -- Close Windows & Exit Hyprland {{{1
     hl.bind(
@@ -37,47 +38,47 @@ function M.setup(cfg)
     )
     hl.bind(
         mainMod .. " + U",
-        hl.dsp.exec_cmd("/home/tom/.local/bin/zen"),
+        hl.dsp.exec_cmd(home .. "/.local/bin/zen"),
         { description = "Zen Browser" }
     )
     hl.bind(
         mainMod .. " + Space",
-        hl.dsp.exec_cmd("~/.config/hypr/scripts/hypr-commands-noctalia.lua"),
+        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/hypr-commands-noctalia.lua"),
         { description = "Hyprland Command Palette" }
     )
     hl.bind(
         mainMod .. " + P",
-        hl.dsp.exec_cmd("~/Code/lua/fuzzel_scripts/find-files2.lua"),
+        hl.dsp.exec_cmd(home .. "/Code/lua/fuzzel_scripts/find-files2.lua"),
         { description = "Find Files & PDFs Script" }
     )
     hl.bind(
         mainMod .. " + M",
-        hl.dsp.exec_cmd("~/Code/lua/fuzzel_scripts/find-music-kew.lua"),
+        hl.dsp.exec_cmd(home .. "/Code/lua/fuzzel_scripts/find-music-kew.lua"),
         { description = "Kew Music Select in Fuzzel" }
     )
     hl.bind(
         mainMod .. " + C",
-        hl.dsp.exec_cmd("~/.config/hypr/scripts/color-picker-hypr.lua"),
+        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/color-picker-hypr.lua"),
         { description = "Color Picker in Fuzzel" }
     )
     hl.bind(
         mainMod .. " + G",
-        hl.dsp.exec_cmd("~/.config/hypr/scripts/buku-fuzzel-hypr.lua"),
+        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/buku-fuzzel-hypr.lua"),
         { description = "Buku Web Bookmarks in Fuzzel" }
     )
     hl.bind(
         mainMod .. " + W",
-        hl.dsp.exec_cmd("~/.local/share/snippets/scripts/one-liner-to-fuzzel.fish"),
+        hl.dsp.exec_cmd(home .. "/.local/share/snippets/scripts/one-liner-to-fuzzel.fish"),
         { description = "One-liners" }
     )
     hl.bind(
         mainMod .. " + X",
-        hl.dsp.exec_cmd("~/.config/hypr/scripts/powermenu-hypr-noctalia.lua"),
+        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/powermenu-hypr-noctalia.lua"),
         { description = "PowerMenu in Fuzzel" }
     )
     hl.bind(
         mainMod .. " + Z",
-        hl.dsp.exec_cmd("~/.local/share/snippets/scripts/snip-to-fuzzel.fish"),
+        hl.dsp.exec_cmd(home .. "/.local/share/snippets/scripts/snip-to-fuzzel.fish"),
         { description = "Snippets" }
     )
 
@@ -447,11 +448,11 @@ function M.setup(cfg)
                 "Screenshot Fullscreen",
             },
             ["o"] = {
-                "/home/tom/Code/shell/ocr_screenshot_in_clipboard/ocr-screenshot-in-clipboard.fish --strip-newlines",
+                home .. "/.config/hypr/scripts/ocr-screenshot-in-clipboard.fish --strip-newlines",
                 "Screenshot to OCR Without Lines",
             },
             ["l"] = {
-                "/home/tom/Code/shell/ocr_screenshot_in_clipboard/ocr-screenshot-in-clipboard.fish",
+                home .. "/.config/hypr/scripts/ocr-screenshot-in-clipboard.fish",
                 "Screenshots to OCR Lines Preserved",
             },
         }
