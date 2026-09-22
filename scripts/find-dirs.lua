@@ -119,12 +119,15 @@ end
 ------------------ APPLICATION DEFINITIONS -------------------------------
 -- Custom applications menu for opening the chosen directory
 local applications = {
-    { exec = "zeditor",                       label = "Zed Editor" },
-    { exec = "foot -e nvim",                  label = "Neovim (Foot)" },
-    { exec = "foot -e yazi",                  label = "Yazi File Manager (Foot)" },
-    { exec = "nautilus",                      label = "Nautilus File Manager" },
+    { exec = "zeditor", label = "Zed Editor" },
+    { exec = "foot -e nvim", label = "Neovim (Foot)" },
+    {
+        exec = "foot -e yazi",
+        label = "Yazi File Manager (Foot)",
+    },
+    { exec = "nautilus", label = "Nautilus File Manager" },
     { exec = home .. "/.local/bin/zen --new-tab", label = "Zen Browser" },
-    { exec = "amberol",                       label = "Amberol Music Player" },
+    { exec = "amberol", label = "Amberol Music Player" },
 }
 
 ------------------ SEARCH DIRECTORIES WITH FD ----------------------------
@@ -143,7 +146,10 @@ if #existing_paths == 0 then
     fd_command = "fd --type d --exclude '.*'"
 else
     -- Search target directories excluding hidden directories
-    fd_command = string.format("fd --type d --exclude '.*' . %s", table.concat(existing_paths, " "))
+    fd_command = string.format(
+        "fd --type d --exclude '.*' . %s",
+        table.concat(existing_paths, " ")
+    )
 end
 
 local found_dirs = capture(fd_command)
@@ -158,19 +164,28 @@ end
 local dir_paths = {}
 
 for full_path in string.gmatch(found_dirs, "[^\n]+") do
-    local shortened_path = full_path:match("[^/]+/[^/]+$") or full_path
+    -- Strip trailing slashes so Lua pattern matching works reliably
+    local clean_full_path = full_path:gsub("/+$", "")
+
+    -- Extract last two directory components (e.g., "Code/project")
+    local shortened_path = clean_full_path:match("[^/]+/[^/]+$")
+        or clean_full_path
+
+    -- Replace underscores and hyphens with spaces for clean display
     shortened_path = shortened_path:gsub("[_-]", " ")
 
+    -- Truncate if still over 70 characters
     if #shortened_path > 70 then
-        dir_paths[full_path] = "..." .. shortened_path:sub(-67)
+        dir_paths[clean_full_path] = "..." .. shortened_path:sub(-67)
     else
-        dir_paths[full_path] = shortened_path
+        dir_paths[clean_full_path] = shortened_path
     end
 end
 
 ------------------ CHOOSE DIRECTORY PATH ---------------------------------
 local dir_lines = two_col_str_for_fuzzel(dir_paths)
-local dir_fuzzel_args = [[--dmenu --prompt="Directory > " --width=60 --minimal-lines --with-nth=2 --accept-nth=1]]
+local dir_fuzzel_args =
+    [[--dmenu --prompt="Directory > " --width=60 --minimal-lines --with-nth=2 --accept-nth=1]]
 
 local chosen_dir_path, dir_exit_code = run_fuzzel(dir_lines, dir_fuzzel_args)
 
@@ -187,7 +202,8 @@ end
 
 ------------------ CHOOSE APPLICATION TO OPEN WITH -----------------------
 local app_lines = app_list_to_fuzzel_str(applications)
-local app_fuzzel_args = [[--dmenu --prompt="Open with > " --width=45 --minimal-lines --with-nth=2 --accept-nth=1]]
+local app_fuzzel_args =
+    [[--dmenu --prompt="Open with > " --width=45 --minimal-lines --with-nth=2 --accept-nth=1]]
 
 local chosen_app_exec, app_exit_code = run_fuzzel(app_lines, app_fuzzel_args)
 
