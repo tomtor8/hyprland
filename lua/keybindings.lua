@@ -58,8 +58,8 @@ function M.setup(cfg)
     )
     hl.bind(
         mainMod .. " + M",
-        hl.dsp.exec_cmd(home .. "/Code/lua/fuzzel_scripts/find-music-kew.lua"),
-        { description = "Kew Music Select in Fuzzel" }
+        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/find-music-dirs.lua"),
+        { description = "Select Music Directory in Fuzzel" }
     )
     hl.bind(
         mainMod .. " + C",

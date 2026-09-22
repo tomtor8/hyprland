@@ -56,7 +56,7 @@ function M.setup(cfg)
 
     hl.window_rule({
         match = {
-            class = "^(io.github.cboxdoerfer.FSearch|foot-snip|org.gnome.Nautilus)$",
+            class = "^(io.github.cboxdoerfer.FSearch|foot-snip|org.gnome.Nautilus|yazi)$",
         },
         float = true,
         size = { "(monitor_w * 0.5)", "(monitor_h * 0.6)" },
@@ -71,14 +71,14 @@ function M.setup(cfg)
         size = { "(monitor_w * 0.3)", "(monitor_h * 0.3)" },
     })
 
-    hl.window_rule({
-        match = {
-            class = "^kew$",
-        },
-        float = true,
-        workspace = "4 silent",
-        size = { "(monitor_w * 0.3)", "(monitor_h * 0.8)" },
-    })
+    -- hl.window_rule({
+    --     match = {
+    --         class = "^kew$",
+    --     },
+    --     float = true,
+    --     workspace = "4 silent",
+    --     size = { "(monitor_w * 0.3)", "(monitor_h * 0.8)" },
+    -- })
 
     -- Hyprland window rules {{{2
     hl.window_rule({

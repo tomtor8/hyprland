@@ -119,19 +119,20 @@ end
 ------------------ APPLICATION DEFINITIONS -------------------------------
 -- Custom applications menu for opening the chosen directory
 local applications = {
-    {
-        exec = "foot --app-id yazi -e yazi",
-        label = "Yazi File Manager (Foot)",
-    },
-    { exec = "nautilus", label = "Nautilus File Manager" },
-    { exec = "zeditor", label = "Zed Editor" },
-    { exec = home .. "/.local/bin/zen --new-tab", label = "Zen Browser" },
     { exec = "amberol", label = "Amberol Music Player" },
-    { exec = "foot -e nvim", label = "Neovim (Foot)" },
+    {
+        exec = "foot --app-id kew -e kew play",
+        label = "Kew (Foot)",
+    },
+    {
+        exec = "foot --app-id mpv -e mpv --no-video",
+        label = "MPV - No Video (Foot)",
+    },
+    { exec = "eartag", label = "Eartag Music Metadata Editor" },
 }
 
 ------------------ SEARCH DIRECTORIES WITH FD ----------------------------
-local paths = { home .. "/Documents", "/mnt/sam_ssd/docs", home .. "/Code" }
+local paths = { home .. "/Music", "/mnt/sam_ssd/music" }
 local existing_paths = {}
 
 for _, path in ipairs(paths) do
