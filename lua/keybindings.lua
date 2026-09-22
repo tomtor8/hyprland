@@ -46,11 +46,11 @@ function M.setup(cfg)
         hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/hypr-commands-noctalia.lua"),
         { description = "Hyprland Command Palette" }
     )
-    -- hl.bind(
-    --     mainMod .. " + P",
-    --     hl.dsp.exec_cmd(home .. "/Code/lua/fuzzel_scripts/find-files2.lua"),
-    --     { description = "Find Files & PDFs Script" }
-    -- )
+    hl.bind(
+        mainMod .. " + P",
+        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/find-files.lua"),
+        { description = "Find Files Custom Script" }
+    )
     hl.bind(
         "CTRL + Space",
         hl.dsp.exec_cmd("fsearch"),
