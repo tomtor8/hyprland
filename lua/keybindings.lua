@@ -52,6 +52,11 @@ function M.setup(cfg)
         { description = "Find Files Custom Script" }
     )
     hl.bind(
+        mainMod .. " + D",
+        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/find-dirs.lua"),
+        { description = "Find Files Custom Script" }
+    )
+    hl.bind(
         "CTRL + Space",
         hl.dsp.exec_cmd("fsearch"),
         { description = "File and Folder Search" }
