@@ -200,7 +200,7 @@ end
 ------------------ CHOOSE DIRECTORY PATH ---------------------------------
 local dir_lines = two_col_str_for_fuzzel(dir_paths)
 local dir_fuzzel_args =
-    [[--dmenu --prompt="Directory > " --width=70 --minimal-lines --with-nth=2 --accept-nth=1 --counter]]
+    [[--dmenu --prompt="Music Directory > " --width=70 --minimal-lines --with-nth=2 --accept-nth=1 --counter]]
 
 local chosen_dir_path, dir_exit_code = run_fuzzel(dir_lines, dir_fuzzel_args)
 
