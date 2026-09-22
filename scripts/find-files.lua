@@ -191,7 +191,7 @@ elseif chosen_category == "PDFs" then
 end
 
 local file_fuzzel_args = string.format(
-    [[--dmenu --placeholder=%q --prompt="Search %s > " --width=60 --minimal-lines --with-nth=2 --accept-nth=1]],
+    [[--dmenu --placeholder=%q --prompt="Search %s > " --width=60 --minimal-lines --with-nth=2 --accept-nth=1 --match-nth=1 --match-mode="fuzzy"]],
     placeholder_text,
     chosen_category
 )
