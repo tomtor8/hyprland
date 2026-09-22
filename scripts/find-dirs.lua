@@ -164,28 +164,29 @@ end
 local dir_paths = {}
 
 for full_path in string.gmatch(found_dirs, "[^\n]+") do
-    -- Strip trailing slashes so Lua pattern matching works reliably
     local clean_full_path = full_path:gsub("/+$", "")
 
-    -- Extract last two directory components (e.g., "Code/project")
-    local shortened_path = clean_full_path:match("[^/]+/[^/]+$")
-        or clean_full_path
+    -- Format display path for Fuzzel
+    local display_path = clean_full_path
 
-    -- Replace underscores and hyphens with spaces for clean display
-    shortened_path = shortened_path:gsub("[_-]", " ")
-
-    -- Truncate if still over 70 characters
-    if #shortened_path > 70 then
-        dir_paths[clean_full_path] = "..." .. shortened_path:sub(-67)
-    else
-        dir_paths[clean_full_path] = shortened_path
+    -- Collapse home directory to ~
+    if display_path:sub(1, #home) == home then
+        display_path = "~" .. display_path:sub(#home + 1)
+    -- Replace external mount prefix with a drive symbol
+    elseif display_path:sub(1, 13) == "/mnt/sam_ssd/" then
+        display_path = "󱊟  " .. display_path:sub(14)
+    elseif display_path == "/mnt/sam_ssd" then
+        display_path = "󱊟"
     end
+
+    -- Map full path to the tilde-formatted path
+    dir_paths[clean_full_path] = display_path
 end
 
 ------------------ CHOOSE DIRECTORY PATH ---------------------------------
 local dir_lines = two_col_str_for_fuzzel(dir_paths)
 local dir_fuzzel_args =
-    [[--dmenu --prompt="Directory > " --width=60 --minimal-lines --with-nth=2 --accept-nth=1]]
+    [[--dmenu --prompt="Directory > " --width=70 --minimal-lines --with-nth=2 --accept-nth=1]]
 
 local chosen_dir_path, dir_exit_code = run_fuzzel(dir_lines, dir_fuzzel_args)
 
