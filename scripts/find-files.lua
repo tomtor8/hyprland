@@ -104,8 +104,8 @@ end
 local categories = {
     ["PDFs"] = "pdf",
     ["Images"] = "jpg|png|jpeg",
-    ["Text Files"] = "txt|md",
-    ["Scripts"] = "sh|py|lua",
+    ["Text Files"] = "txt|md|ini|kdl|toml|json",
+    ["Scripts"] = "sh|py|lua|fish",
 }
 
 ------------------ CHOOSE FILE CATEGORY ----------------------------------
@@ -128,7 +128,7 @@ if not chosen_extensions then
 end
 
 ------------------ SEARCH PATHS ------------------------------------------
-local paths = { "/home/tom/Documents", "/mnt/sam_ssd/docs", "/home/tom/Code" }
+local paths = { home .. "/Documents", "/mnt/sam_ssd/docs", home .. "/.config" }
 local existing_paths = {}
 
 for _, path in ipairs(paths) do
