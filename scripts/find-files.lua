@@ -41,6 +41,20 @@ local function path_exists(path)
     return false
 end
 
+---Check if path exists and is a directory
+---@param path string
+---@return boolean
+local function is_dir(path)
+    -- Trailing slash forces path resolution to fail on regular files
+    local f, _, code = io.open(path .. "/", "r")
+    if f then
+        f:close()
+        return true
+    end
+    -- Error code 13 (Permission denied) still means the directory exists
+    return code == 13
+end
+
 ---Capture stdout from a command
 ---@param cmd string
 ---@return string|nil
@@ -108,7 +122,7 @@ end
 ------------------ CATEGORIES DEFINITION ---------------------------------
 local categories = {
     ["PDFs"] = "pdf",
-    ["Images"] = "jpg|png|jpeg",
+    -- ["Images"] = "jpg|png|jpeg",
     ["Text Files"] = "txt|md|ini|kdl|toml|json",
     ["Scripts"] = "sh|py|lua|fish",
 }
@@ -137,14 +151,8 @@ local paths = { home .. "/Documents", "/mnt/sam_ssd/docs", home .. "/.config" }
 local existing_paths = {}
 
 for _, path in ipairs(paths) do
-    -- Direct filesystem check instead of shell call
-    local check_handle = io.popen(string.format("test -d %q && echo 1", path))
-    if check_handle then
-        local res = check_handle:read("*a")
-        check_handle:close()
-        if res and res:find("1") then
-            table.insert(existing_paths, string.format("%q", path))
-        end
+    if is_dir(path) then
+        table.insert(existing_paths, string.format("%q", path))
     end
 end
 
