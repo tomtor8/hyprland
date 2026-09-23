@@ -7,11 +7,21 @@ local home = os.getenv("HOME") or "/home/tom"
 ---@param dir_path string
 ---@return boolean|nil
 local function launch_app(app, dir_path)
+    -- "nohup %s %s >/dev/null 2>&1 &" app: desktop agnostic
+    -- Escape inner double quotes in arguments for the hyprctl call
+    local safe_path = dir_path:gsub('"', '\\"')
+    local full_cmd = string.format('%s "%s"', app, safe_path)
+
+    -- Using long brackets [=[ ... ]=] keeps outer single/double quotes clean
     local cmd = string.format(
-        "nohup %s %s >/dev/null 2>&1 &",
-        app,
-        os.date() and string.format("%q", dir_path) or "'" .. dir_path .. "'"
+        [=[hyprctl eval 'hl.dispatch(hl.dsp.exec_cmd("%s"))']=],
+        full_cmd:gsub('"', '\\"')
     )
+    -- local cmd = string.format(
+    --     "nohup %s %s >/dev/null 2>&1 &",
+    --     app,
+    --     os.date() and string.format("%q", dir_path) or "'" .. dir_path .. "'"
+    -- )
     local ok, _, code = os.execute(cmd)
     if not ok then
         local notify = string.format(
@@ -125,13 +135,13 @@ local applications = {
     },
     { exec = "nautilus", label = "Nautilus File Manager" },
     { exec = "zeditor", label = "Zed Editor" },
+    { exec = "imv", label = "Image Viewer" },
     { exec = home .. "/.local/bin/zen --new-tab", label = "Zen Browser" },
-    { exec = "amberol", label = "Amberol Music Player" },
     { exec = "foot -e nvim", label = "Neovim (Foot)" },
 }
 
 ------------------ SEARCH DIRECTORIES WITH FD ----------------------------
-local paths = { home .. "/Documents", "/mnt/sam_ssd/docs", home .. "/Code" }
+local paths = { home .. "/Documents", "/mnt/sam_ssd/docs", home .. "/Pictures" }
 local existing_paths = {}
 
 for _, path in ipairs(paths) do

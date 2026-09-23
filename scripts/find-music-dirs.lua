@@ -7,10 +7,15 @@ local home = os.getenv("HOME") or "/home/tom"
 ---@param dir_path string
 ---@return boolean|nil
 local function launch_app(app, dir_path)
+    -- "nohup %s %s >/dev/null 2>&1 &" app: desktop agnostic
+    -- Escape inner double quotes in arguments for the hyprctl call
+    local safe_path = dir_path:gsub('"', '\\"')
+    local full_cmd = string.format('%s "%s"', app, safe_path)
+
+    -- Using long brackets [=[ ... ]=] keeps outer single/double quotes clean
     local cmd = string.format(
-        "nohup %s %s >/dev/null 2>&1 &",
-        app,
-        os.date() and string.format("%q", dir_path) or "'" .. dir_path .. "'"
+        [=[hyprctl eval 'hl.dispatch(hl.dsp.exec_cmd("%s"))']=],
+        full_cmd:gsub('"', '\\"')
     )
     local ok, _, code = os.execute(cmd)
     if not ok then

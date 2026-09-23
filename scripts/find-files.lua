@@ -13,17 +13,11 @@ local function launch_app(app, file_path)
     local safe_path = file_path:gsub('"', '\\"')
     local full_cmd = string.format('%s "%s"', app, safe_path)
 
-    -- local cmd = string.format(
-    --     [[hyprctl eval 'hl.dispatch(hl.dsp.exec_cmd("%s %s"))']],
-    --     app,
-    --     os.date() and string.format("%q", file_path) or "'" .. file_path .. "'"
-    -- )
     -- Using long brackets [=[ ... ]=] keeps outer single/double quotes clean
     local cmd = string.format(
         [=[hyprctl eval 'hl.dispatch(hl.dsp.exec_cmd("%s"))']=],
         full_cmd:gsub('"', '\\"')
     )
-    print(cmd)
     local ok, _, code = os.execute(cmd)
     if not ok then
         local notify = string.format(
