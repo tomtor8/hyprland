@@ -8,11 +8,22 @@ local home = os.getenv("HOME")
 ---@param file_path string
 ---@return boolean|nil
 local function launch_app(app, file_path)
+    -- "nohup %s %s >/dev/null 2>&1 &" app: desktop agnostic
+    -- Escape inner double quotes in arguments for the hyprctl call
+    local safe_path = file_path:gsub('"', '\\"')
+    local full_cmd = string.format('%s "%s"', app, safe_path)
+
+    -- local cmd = string.format(
+    --     [[hyprctl eval 'hl.dispatch(hl.dsp.exec_cmd("%s %s"))']],
+    --     app,
+    --     os.date() and string.format("%q", file_path) or "'" .. file_path .. "'"
+    -- )
+    -- Using long brackets [=[ ... ]=] keeps outer single/double quotes clean
     local cmd = string.format(
-        "nohup %s %s >/dev/null 2>&1 &",
-        app,
-        os.date() and string.format("%q", file_path) or "'" .. file_path .. "'"
+        [=[hyprctl eval 'hl.dispatch(hl.dsp.exec_cmd("%s"))']=],
+        full_cmd:gsub('"', '\\"')
     )
+    print(cmd)
     local ok, _, code = os.execute(cmd)
     if not ok then
         local notify = string.format(
@@ -215,7 +226,8 @@ if chosen_category == "Text Files" or chosen_category == "Scripts" then
     local app = (file_exit_code == 10) and "zeditor" or "foot -e nvim"
     launch_app(app, chosen_file_path)
 elseif chosen_category == "PDFs" then
-    local app = (file_exit_code == 10) and (home .. "/.local/bin/zen --new-tab") or "xdg-open"
+    local app = (file_exit_code == 10) and (home .. "/.local/bin/zen --new-tab")
+        or "xdg-open"
     launch_app(app, chosen_file_path)
 else
     launch_app("xdg-open", chosen_file_path)
