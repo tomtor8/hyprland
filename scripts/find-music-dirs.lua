@@ -28,17 +28,17 @@ local function launch_app(app, dir_path)
     return ok
 end
 
----Check if directory exists
+---Check if path exists and is a directory
 ---@param path string
 ---@return boolean
-local function dir_exists(path)
-    local check_handle = io.popen(string.format("test -d %q && echo 1", path))
-    if check_handle then
-        local res = check_handle:read("*a")
-        check_handle:close()
-        return res and res:find("1") ~= nil
+local function is_dir(path)
+    local f, _, code = io.open(path .. "/", "r")
+    if f then
+        f:close()
+        return true
     end
-    return false
+    -- Error code 13 (Permission denied) means directory exists
+    return code == 13
 end
 
 ---Capture stdout from a command
@@ -141,7 +141,7 @@ local paths = { home .. "/Music", "/mnt/sam_ssd/music" }
 local existing_paths = {}
 
 for _, path in ipairs(paths) do
-    if dir_exists(path) then
+    if is_dir(path) then
         table.insert(existing_paths, string.format("%q", path))
     end
 end
@@ -213,7 +213,7 @@ if dir_exit_code ~= 0 or chosen_dir_path == "" then
     os.exit(0)
 end
 
-if not dir_exists(chosen_dir_path) then
+if not is_dir(chosen_dir_path) then
     os.execute(
         "notify-send -i 'dialog-warning' 'Fuzzel' 'Chosen directory path does not exist.'"
     )
