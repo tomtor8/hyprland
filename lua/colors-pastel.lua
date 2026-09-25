@@ -23,7 +23,7 @@ function M.setup(cfg)
                 border_locked_inactive = "rgba(f9e2afaa)", -- Yellow
             },
             groupbar = {
-                text_color = "rgba(cdd6f4ff)",          -- Text
+                text_color = "rgba(fab387ff)",          -- Text orig
                 text_color_inactive = "rgba(a6adc8ff)", -- Subtext0
                 col = {
                     active = "rgba(1e1e2eff)",          -- Base
