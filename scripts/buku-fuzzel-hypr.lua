@@ -98,7 +98,7 @@ end
 -- make desktop names lowercase
 local desktop = (os.getenv("XDG_CURRENT_DESKTOP") or ""):lower()
 local zen_cmd =
-    string.format("/home/tom/.local/bin/zen --new-tab %s", shell_escape(url))
+    string.format("google-chrome-stable --new-tab %s", shell_escape(url))
 
 if desktop == "hyprland" then
     local hypr_payload = string.format([[hl.dsp.exec_cmd("%s")]], zen_cmd)
