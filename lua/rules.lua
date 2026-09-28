@@ -71,6 +71,16 @@ function M.setup(cfg)
         size = { "(monitor_w * 0.3)", "(monitor_h * 0.3)" },
     })
 
+    hl.window_rule({
+        match = {
+            class = "xdg-desktop-portal-gtk",
+            initial_title = "^(Open Folder|Open File|All Files)$",
+        },
+        float = true,
+        size = { "(monitor_w * 0.4)", "(monitor_h * 0.5)" },
+        center = true
+    })
+
     -- hl.window_rule({
     --     match = {
     --         class = "^kew$",
