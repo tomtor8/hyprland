@@ -37,9 +37,9 @@ function M.setup(cfg)
         { description = "File Manager Nautilus" }
     )
     hl.bind(
-        mainMod .. " + U",
-        hl.dsp.exec_cmd(home .. "/.local/bin/zen"),
-        { description = "Zen Browser" }
+        mainMod .. " + W",
+        hl.dsp.exec_cmd("google-chrome-stable"),
+        { description = "Google Chrome" }
     )
     hl.bind(
         mainMod .. " + Space",
@@ -77,7 +77,7 @@ function M.setup(cfg)
         { description = "Buku Web Bookmarks in Fuzzel" }
     )
     hl.bind(
-        mainMod .. " + W",
+        mainMod .. " + O",
         hl.dsp.exec_cmd(home .. "/.local/share/snippets/scripts/one-liner-to-fuzzel.fish"),
         { description = "One-liners" }
     )

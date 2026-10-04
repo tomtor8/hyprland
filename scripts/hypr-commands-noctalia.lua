@@ -52,6 +52,10 @@ local commands = {
             anim_toggle
         ),
     },
+    {
+        "󰹑  Annotate Screen & Screenshot",
+        [[noctalia msg annotate]],
+    },
     { "󰂯  Bluetooth Toggle", "noctalia msg bluetooth-toggle" },
     {
         "  Check Git Remote Repos",
@@ -171,14 +175,14 @@ local commands = {
         "noctalia msg session lock-and-suspend",
     },
     { "󰍃  Session Logout", "noctalia msg session logout" },
-    {
-        "󰹑  Screenshot Region and Annotate",
-        [[fish -c "sleep 1; grim -g (slurp -d -c '#74c7ecff') - | satty -f - --copy-command wl-copy -o '~/Pictures/Screenshots/annotated-%Y%m%d-%H%M%S.png'"]],
-    },
-    {
-        "󰹑  Screenshot Screen and Annotate",
-        [[fish -c "sleep 1; grim - | satty -f - --copy-command wl-copy -o '~/Pictures/Screenshots/annotated-%Y%m%d-%H%M%S.png'"]],
-    },
+    -- {
+    --     "󰹑  Screenshot Region and Annotate",
+    --     [[fish -c "sleep 1; grim -g (slurp -d -c '#74c7ecff') - | satty -f - --copy-command wl-copy -o '~/Pictures/Screenshots/annotated-%Y%m%d-%H%M%S.png'"]],
+    -- },
+    -- {
+    --     "󰹑  Screenshot Screen and Annotate",
+    --     [[fish -c "sleep 1; grim - | satty -f - --copy-command wl-copy -o '~/Pictures/Screenshots/annotated-%Y%m%d-%H%M%S.png'"]],
+    -- },
     {
         "󰘞  Scrolling: Center Focused Column",
         [[hyprctl dispatch 'hl.dsp.layout("center")']],
