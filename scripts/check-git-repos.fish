@@ -5,7 +5,8 @@ set -l repos \
     "$HOME/Documents/notes" \
     "$HOME/.config/hypr" \
     "$HOME/.config/nvim" \
-    "$HOME/.local/share/snippets"
+    "$HOME/.local/share/snippets" \
+    "$HOME/.local/share/dotfiles"
 
 set -l behind_list
 set -l error_list
