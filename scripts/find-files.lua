@@ -198,9 +198,9 @@ local file_lines = two_col_str_for_fuzzel(file_paths)
 
 local placeholder_text = ""
 if chosen_category == "Text Files" or chosen_category == "Scripts" then
-    placeholder_text = "Alt+1: open in Zed"
+    placeholder_text = "Alt+1: open in Zed Editor"
 elseif chosen_category == "PDFs" then
-    placeholder_text = "Alt+1: open in Chrome"
+    placeholder_text = "Alt+1: open in Zen Browser"
 end
 
 local file_fuzzel_args = string.format(
@@ -228,7 +228,7 @@ if chosen_category == "Text Files" or chosen_category == "Scripts" then
     local app = (file_exit_code == 10) and "zeditor" or "foot -e nvim"
     launch_app(app, chosen_file_path)
 elseif chosen_category == "PDFs" then
-    local app = (file_exit_code == 10) and ("google-chrome-stable --new-tab")
+    local app = (file_exit_code == 10) and (home .. "/.local/bin/zen --new-tab")
         or "xdg-open"
     launch_app(app, chosen_file_path)
 else

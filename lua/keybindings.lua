@@ -38,8 +38,8 @@ function M.setup(cfg)
     )
     hl.bind(
         mainMod .. " + W",
-        hl.dsp.exec_cmd("google-chrome-stable"),
-        { description = "Google Chrome" }
+        hl.dsp.exec_cmd(home .. "/.local/bin/zen"),
+        { description = "Zen Browser" }
     )
     hl.bind(
         mainMod .. " + Space",
@@ -72,7 +72,7 @@ function M.setup(cfg)
         { description = "Color Picker in Fuzzel" }
     )
     hl.bind(
-        mainMod .. " + G",
+        mainMod .. " + U",
         hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/buku-fuzzel-hypr.lua"),
         { description = "Buku Web Bookmarks in Fuzzel" }
     )

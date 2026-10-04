@@ -131,7 +131,6 @@ local applications = {
     { exec = "nautilus", label = "Nautilus File Manager" },
     { exec = "zeditor", label = "Zed Editor" },
     { exec = "imv", label = "Image Viewer" },
-    { exec = "google-chrome-stable --new-tab", label = "Google Chrome" },
     { exec = home .. "/.local/bin/zen --new-tab", label = "Zen Browser" },
     { exec = "foot -e nvim", label = "Neovim (Foot)" },
 }

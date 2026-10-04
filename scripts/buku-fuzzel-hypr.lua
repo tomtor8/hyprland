@@ -1,5 +1,7 @@
 #!/usr/bin/env lua
 
+local home = os.getenv("HOME")
+
 ---Execute a shell command and capture its stdout
 ---@param cmd string
 ---@return string|nil
@@ -21,7 +23,7 @@ local function shell_escape(str)
 end
 
 -- 1. Fetch raw bookmarks from Buku
-local raw_buku = capture("/home/tom/.local/bin/buku --nostdin -p -f 5")
+local raw_buku = capture(home .. "/.local/bin/buku --nostdin -p -f 5")
 if not raw_buku or raw_buku == "" then
     os.exit(0)
 end
@@ -78,7 +80,7 @@ if not id then
 end
 
 local raw_record =
-    capture(string.format("/home/tom/.local/bin/buku -p %s --format 1", id))
+    capture(string.format(home .. "/.local/bin/buku -p %s --format 1", id))
 if not raw_record or raw_record == "" then
     os.exit(1)
 end
@@ -98,7 +100,7 @@ end
 -- make desktop names lowercase
 local desktop = (os.getenv("XDG_CURRENT_DESKTOP") or ""):lower()
 local zen_cmd =
-    string.format("google-chrome-stable --new-tab %s", shell_escape(url))
+    string.format(home .. "/.local/bin/zen --new-tab %s", shell_escape(url))
 
 if desktop == "hyprland" then
     local hypr_payload = string.format([[hl.dsp.exec_cmd("%s")]], zen_cmd)
