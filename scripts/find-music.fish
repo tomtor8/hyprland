@@ -27,6 +27,8 @@ function update_db
         end
     end
     printf '%s\n' $lines_for_artists_db >$music_cache/artists-db.txt
+    # sort file in place based on the second field separated by :
+    sort --field-separator : --key 2 --output $music_cache/artists-db.txt $music_cache/artists-db.txt
     for music_dir in $music_dirs
         if not test -e $music_dir
             continue
@@ -45,6 +47,7 @@ function update_db
         end
     end
     printf '%s\n' $lines_for_albums_db >$music_cache/albums-db.txt
+    sort --field-separator : --key 2 --output $music_cache/albums-db.txt $music_cache/albums-db.txt
 end
 
 if not test -e $music_cache/artists-db.txt
@@ -65,12 +68,11 @@ set -l full_path
 
 switch $category
     case Artists
-        set full_path (fuzzel --dmenu --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 60 --prompt="Artists > " --placeholder=" Return Kew | Alt+1 Mpv" < $music_cache/artists-db.txt)
-        set fuzzel_status $status
+        set prompt "Artists > "
+        set db artists-db.txt
     case Albums
-        set full_path (fuzzel --dmenu --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 60 --prompt="Albums > " --placeholder=" Return Kew | Alt+1 Mpv" < $music_cache/albums-db.txt)
-        set fuzzel_status $status
-        # check_fuzzel_status
+        set prompt "Albums > "
+        set db albums-db.txt
     case Update
         update_db
         notify-send -i emblem-default "Updated Database" "Updated music database in .cache/find_music"
@@ -78,6 +80,9 @@ switch $category
     case '*'
         exit 0
 end
+
+set full_path (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 60 --prompt="$prompt" --placeholder=" Return Kew | Alt+1 Mpv" < $music_cache/$db)
+set fuzzel_status $status
 
 # $status 2 means fuzzel was exited using Esc, $status 0 Return fuzzel value
 # $status 10 Alt+1 plays in amberol; $11 Alt+2 eartag
