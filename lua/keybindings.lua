@@ -5,11 +5,11 @@ function M.setup(cfg)
     -- access shared settings from config.lua via cfg
     -- e.g. cfg.scale
 
-    local terminal = "foot"
-    local fileManager = "nautilus"
+    local home = os.getenv("HOME")
+    local terminal = "kitty"
+    local fileManager = home .. "/.local/bin/strata"
     local ipc = "noctalia msg "
     local mainMod = "SUPER" -- Sets "Windows" key as main modifier
-    local home = os.getenv("HOME")
 
     -- Close Windows & Exit Hyprland {{{1
     hl.bind(
@@ -29,12 +29,12 @@ function M.setup(cfg)
     hl.bind(
         mainMod .. " + Return",
         hl.dsp.exec_cmd(terminal),
-        { description = "Terminal Foot" }
+        { description = "Terminal Kitty" }
     )
     hl.bind(
         mainMod .. " + E",
         hl.dsp.exec_cmd(fileManager),
-        { description = "File Manager Nautilus" }
+        { description = "File Manager Strata" }
     )
     hl.bind(
         mainMod .. " + W",
@@ -253,36 +253,36 @@ function M.setup(cfg)
     for i = 1, 10 do
         local key = i % 10 -- 10 maps to key 0
         hl.bind(
-            "CTRL + " .. key,
+            mainMod .. " + " .. key,
             hl.dsp.focus({ workspace = i }),
             { description = "Focus Workspace " .. i }
         )
         hl.bind(
-            "CTRL + SHIFT + " .. key,
+            mainMod .. " + SHIFT + " .. key,
             hl.dsp.window.move({ workspace = i }),
             { description = "Move Window to Workspace " .. i }
         )
     end
 
     hl.bind(
-        "CTRL + SHIFT + down",
+        mainMod .. " + SHIFT + down",
         hl.dsp.window.move({ workspace = "+1" }),
         { description = "Move Window to Next Workspace" }
     )
 
     hl.bind(
-        "CTRL + SHIFT + up",
+        mainMod .. " + SHIFT + up",
         hl.dsp.window.move({ workspace = "-1" }),
         { description = "Move Window to Previous Workspace" }
     )
 
     hl.bind(
-        "CTRL + down",
+        mainMod .. " + down",
         hl.dsp.focus({ workspace = "+1" }),
         { description = "Focus Workspace Next" }
     )
     hl.bind(
-        "CTRL + up",
+        mainMod .. " + up",
         hl.dsp.focus({ workspace = "-1" }),
         { description = "Focus Workspace Previous" }
     )
@@ -356,6 +356,21 @@ function M.setup(cfg)
     hl.bind(
         mainMod .. " + mouse_up",
         hl.dsp.focus({ workspace = "e-1" }),
+        { repeating = false }
+    )
+    -- hl.bind(
+    --     mainMod .. " + mouse_right",
+    --     hl.dsp.focus({ direction = "right" }),
+    --     { repeating = false }
+    -- )
+    hl.bind(
+        mainMod .. " + mouse_right",
+        hl.dsp.layout("move +col"),
+        { repeating = false }
+    )
+    hl.bind(
+        mainMod .. " + mouse_left",
+        hl.dsp.layout("move -col"),
         { repeating = false }
     )
 

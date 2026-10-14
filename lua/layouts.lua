@@ -26,6 +26,8 @@ function M.setup(cfg)
         scrolling = {
             fullscreen_on_one_column = false,
             focus_fit_method = 1, -- 1 fit, 0 center
+            column_width = 0.5,
+            wrap_focus = true,
         },
     })
     -- }}}

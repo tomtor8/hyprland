@@ -128,6 +128,7 @@ local applications = {
         exec = "foot --app-id yazi -e yazi",
         label = "Yazi File Manager (Foot)",
     },
+    { exec = home .. "/.local/bin/strata", label = "Strata File Manager" },
     { exec = "nautilus", label = "Nautilus File Manager" },
     { exec = "zeditor", label = "Zed Editor" },
     { exec = "imv", label = "Image Viewer" },
