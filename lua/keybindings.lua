@@ -262,6 +262,11 @@ function M.setup(cfg)
             hl.dsp.window.move({ workspace = i }),
             { description = "Move Window to Workspace " .. i }
         )
+        hl.bind(
+            mainMod .. " + ALT + SHIFT + " .. key,
+            hl.dsp.window.move({ workspace = i, follow = false }),
+            { description = "Move Window to Workspace " .. i }
+        )
     end
 
     hl.bind(
