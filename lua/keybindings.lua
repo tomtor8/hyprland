@@ -43,13 +43,10 @@ function M.setup(cfg)
     )
     hl.bind(
         mainMod .. " + Space",
-        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/hypr-commands-noctalia.lua"),
+        hl.dsp.exec_cmd(
+            home .. "/.config/hypr/scripts/hypr-commands-noctalia.lua"
+        ),
         { description = "Hyprland Command Palette" }
-    )
-    hl.bind(
-        mainMod .. " + P",
-        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/find-files.lua"),
-        { description = "Find Files Custom Script" }
     )
     hl.bind(
         mainMod .. " + D",
@@ -78,17 +75,23 @@ function M.setup(cfg)
     )
     hl.bind(
         mainMod .. " + O",
-        hl.dsp.exec_cmd(home .. "/.local/share/snippets/scripts/one-liner-to-fuzzel.fish"),
+        hl.dsp.exec_cmd(
+            home .. "/.local/share/snippets/scripts/one-liner-to-fuzzel.fish"
+        ),
         { description = "One-liners" }
     )
     hl.bind(
         mainMod .. " + X",
-        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/powermenu-hypr-noctalia.lua"),
+        hl.dsp.exec_cmd(
+            home .. "/.config/hypr/scripts/powermenu-hypr-noctalia.lua"
+        ),
         { description = "PowerMenu in Fuzzel" }
     )
     hl.bind(
         mainMod .. " + Z",
-        hl.dsp.exec_cmd(home .. "/.local/share/snippets/scripts/snip-to-fuzzel.fish"),
+        hl.dsp.exec_cmd(
+            home .. "/.local/share/snippets/scripts/snip-to-fuzzel.fish"
+        ),
         { description = "Snippets" }
     )
 
@@ -459,6 +462,41 @@ function M.setup(cfg)
         hl.bind("escape", hl.dsp.submap("reset"))
     end)
 
+    -- Scripts Submaps {{{1
+    hl.bind(mainMod .. " + P", function()
+        hl.dispatch(hl.dsp.submap("scripts"))
+    end, { description = "Scripts Submap" })
+
+    hl.define_submap("scripts", "reset", function()
+        local t = {
+            ["p"] = {
+                home
+                    .. "/.config/hypr/scripts/find-pdfs.fish",
+                "Find PDF files",
+            },
+            ["s"] = {
+                home
+                    .. "/.config/hypr/scripts/find-scripts.fish",
+                "Find script files",
+            },
+            ["t"] = {
+                home
+                    .. "/.config/hypr/scripts/find-text-files.fish",
+                "Find text files",
+            },
+        }
+
+        for k, v in pairs(t) do
+            hl.bind(
+                k,
+                hl.dsp.exec_cmd(v[1]),
+                { repeating = false, description = v[2] }
+            )
+        end
+
+        -- Use `reset` to go back to the global submap
+        hl.bind("escape", hl.dsp.submap("reset"))
+    end)
     -- Screenshot Submaps {{{1
     hl.bind(mainMod .. " + S", function()
         hl.dispatch(
@@ -478,11 +516,13 @@ function M.setup(cfg)
                 "Screenshot Fullscreen",
             },
             ["o"] = {
-                home .. "/.config/hypr/scripts/ocr-screenshot-in-clipboard.fish --strip-newlines",
+                home
+                    .. "/.config/hypr/scripts/ocr-screenshot-in-clipboard.fish --strip-newlines",
                 "Screenshot to OCR Without Lines",
             },
             ["l"] = {
-                home .. "/.config/hypr/scripts/ocr-screenshot-in-clipboard.fish",
+                home
+                    .. "/.config/hypr/scripts/ocr-screenshot-in-clipboard.fish",
                 "Screenshots to OCR Lines Preserved",
             },
         }
