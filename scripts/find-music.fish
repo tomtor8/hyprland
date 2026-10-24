@@ -81,7 +81,7 @@ switch $category
         exit 0
 end
 
-set full_path (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 60 --prompt="$prompt" --placeholder=" Return Kew | Alt+1 Mpv" < $music_cache/$db)
+set full_path (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 60 --prompt="$prompt" --placeholder=" 󰌑 Kew 󰘵 1 Mpv 󰘵 2 Eartag" < $music_cache/$db)
 set fuzzel_status $status
 
 # $status 2 means fuzzel was exited using Esc, $status 0 Return fuzzel value
@@ -92,6 +92,9 @@ switch $fuzzel_status
         disown
     case 10
         foot --app-id mpv -e mpv --no-video $full_path &
+        disown
+    case 11
+        eartag $full_path &
         disown
     case '*'
         exit 0

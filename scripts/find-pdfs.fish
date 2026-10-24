@@ -41,7 +41,7 @@ if not test -e $file_cache/pdfs-db.txt
     notify-send -i emblem-default "Created Database" "PDFs database created in .cache/find_files"
 end
 
-set -l chosen_line (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 80 --prompt="PDFs > " --placeholder=" Return Zathura | Alt+1 Zen" < $file_cache/pdfs-db.txt)
+set -l chosen_line (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 80 --prompt="PDFs > " --placeholder=" 󰌑 Zathura 󰘵 1 Zen" < $file_cache/pdfs-db.txt)
 set -l fuzzel_status $status
 
 # on pressing Esc Fuzzel status is 2

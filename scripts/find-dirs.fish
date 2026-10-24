@@ -1,97 +1,104 @@
 #!/usr/bin/env fish
 
-# add as many directories with music as you want
-set -g music_dirs ~/Music
+# add as many directories as you want
+set -g query_dirs ~/Documents ~/Pictures ~/Projects ~/Code ~/.local/share/snippets ~/.local/share/dotfiles ~/.config/nvim ~/.config/hypr
 
 if not test -d ~/.cache/find_files
     mkdir -p ~/.cache/find_files
 end
 
-set -g music_cache ~/.cache/find_files
+set -g dir_cache ~/.cache/find_files
 
 function update_db
-    set -l lines_for_artists_db
-    set -l lines_for_albums_db
-    for music_dir in $music_dirs
-        if not test -e $music_dir
+    set -l lines_for_dirs_db
+    for query_dir in $query_dirs
+        if not test -e $query_dir
             continue
         end
-        set -l artist_paths (fd '.*' --type directory --min-depth 1 --max-depth 1 $music_dir)
-        for art_path in $artist_paths
-            set art_path (string trim -- "$art_path")
-            if test -d "$art_path"
-                set -l short_art_path (string replace --all "_" " " -- (basename "$art_path"))
-                set -l line_for_artists_db "$art_path:$short_art_path"
-                set -a lines_for_artists_db "$line_for_artists_db"
+        set -l str_to_replace
+        set -l replacement
+        switch "$query_dir"
+            case ~/.local/share/dotfiles
+                set str_to_replace "/home/tom/.local/share/dotfiles"
+                set replacement "DOTFILES"
+            case ~/.local/share/snippets
+                set str_to_replace "/home/tom/.local/share/snippets"
+                set replacement "SNIPPETS"
+            case ~/.config/nvim
+                set str_to_replace "/home/tom/.config/nvim"
+                set replacement "NVIM"
+            case ~/.config/hypr
+                set str_to_replace "/home/tom/.config/hypr"
+                set replacement "HYPRLAND"
+            case ~/Documents
+                set str_to_replace "/home/tom/Documents"
+                set replacement "DOCS"
+            case ~/Pictures
+                set str_to_replace "/home/tom/Pictures"
+                set replacement "PICS"
+            case ~/Projects
+                set str_to_replace "/home/tom/Projects"
+                set replacement "PROJECTS"
+            case ~/Code
+                set str_to_replace "/home/tom/Code"
+                set replacement "CODE"
+            case '*'
+                set str_to_replace "/home/tom"
+                set replacement "~"
+        end
+
+        set -l dir_paths (fd . --type directory $query_dir)
+        for dir_path in $dir_paths
+            set dir_path (string trim -- "$dir_path")
+            if test -d "$dir_path"
+                set -l short_dir_path (string replace "$str_to_replace" "$replacement" -- "$dir_path")
+                set -l line_for_dirs_db "$dir_path:$short_dir_path"
+                set -a lines_for_dirs_db "$line_for_dirs_db"
             end
         end
     end
-    printf '%s\n' $lines_for_artists_db >$music_cache/artists-db.txt
+    set -a lines_for_dirs_db Update:Update
+    printf '%s\n' $lines_for_dirs_db >$dir_cache/dirs-db.txt
     # sort file in place based on the second field separated by :
-    sort --field-separator : --key 2 --output $music_cache/artists-db.txt $music_cache/artists-db.txt
-    for music_dir in $music_dirs
-        if not test -e $music_dir
-            continue
-        end
-        set -l album_paths (fd '.*' --type directory --min-depth 2 --max-depth 2 $music_dir)
-        for alb_path in $album_paths
-            set alb_path (string trim -- "$alb_path")
-            if test -d "$alb_path"
-                set -l dir_name (string split -r -m1 / (dirname "$alb_path"))
-                set -l base_name (basename "$alb_path")
-                set -l combi_name "$dir_name[-1] > $base_name"
-                set combi_name (string replace --all "_" " " -- "$combi_name")
-                set -l line_for_albums_db "$alb_path:$combi_name"
-                set -a lines_for_albums_db "$line_for_albums_db"
-            end
-        end
-    end
-    printf '%s\n' $lines_for_albums_db >$music_cache/albums-db.txt
-    sort --field-separator : --key 2 --output $music_cache/albums-db.txt $music_cache/albums-db.txt
+    sort --field-separator : --key 2 --output $dir_cache/dirs-db.txt $dir_cache/dirs-db.txt
 end
 
-if not test -e $music_cache/artists-db.txt
-    or not test -e $music_cache/albums-db.txt
+if not test -e $dir_cache/dirs-db.txt
     update_db
-    notify-send -i emblem-default "Created Database" "Music database created in .cache/find_files"
+    notify-send -i emblem-default "Created Database" "Directory database created in .cache/find_files"
 end
 
-# Choose category
-set -l category (printf 'Albums\nArtists\nUpdate' | fuzzel --dmenu --width 30 --minimal-lines --prompt="Pick Category > ")
-# pressing everything except Return exits the script
-if test $status -ne 0
+set chosen_line (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 60 --prompt="$prompt" --placeholder=" 󰌑 Strata 󰘵 1 Yazi 󰘵 2 Kitty 󰘵 3 Zen 󰘵 4 Imv" < $dir_cache/dirs-db.txt)
+set -l fuzzel_status $status
+
+# on pressing Esc Fuzzel status is 2
+if test $fuzzel_status -eq 2
     exit 0
 end
 
-set -l fuzzel_status
-set -l full_path
-
-switch $category
-    case Artists
-        set prompt "Artists > "
-        set db artists-db.txt
-    case Albums
-        set prompt "Albums > "
-        set db albums-db.txt
-    case Update
-        update_db
-        notify-send -i emblem-default "Updated Database" "Updated music database in .cache/find_files"
-        exit 0
-    case '*'
-        exit 0
+if test "$chosen_line" = Update
+    update_db
+    notify-send -i emblem-default "Updated Database" "Directory database updated in .cache/find_files"
+    exit 0
 end
-
-set full_path (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 60 --prompt="$prompt" --placeholder=" Return Kew | Alt+1 Mpv" < $music_cache/$db)
-set fuzzel_status $status
 
 # $status 2 means fuzzel was exited using Esc, $status 0 Return fuzzel value
 # $status 10 Alt+1 plays in amberol; $11 Alt+2 eartag
 switch $fuzzel_status
     case 0
-        foot --app-id kew -e kew play $full_path &
+        strata $chosen_line &
         disown
     case 10
-        foot --app-id mpv -e mpv --no-video $full_path &
+        kitty --app-id yazi-dir -e yazi $chosen_line &
+        disown
+    case 11
+        kitty --app-id kitty-editor -e nvim $chosen_line &
+        disown
+    case 12
+        zen --new-tab $chosen_line &
+        disown
+    case 13
+        imv $chosen_line &
         disown
     case '*'
         exit 0

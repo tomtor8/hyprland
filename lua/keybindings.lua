@@ -49,11 +49,6 @@ function M.setup(cfg)
         { description = "Hyprland Command Palette" }
     )
     hl.bind(
-        mainMod .. " + D",
-        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/find-dirs.lua"),
-        { description = "Find Files Custom Script" }
-    )
-    hl.bind(
         "CTRL + Space",
         hl.dsp.exec_cmd("fsearch"),
         { description = "File and Folder Search" }
@@ -469,6 +464,11 @@ function M.setup(cfg)
 
     hl.define_submap("scripts", "reset", function()
         local t = {
+            ["d"] = {
+                home
+                    .. "/.config/hypr/scripts/find-dirs.fish",
+                "Find Directory",
+            },
             ["p"] = {
                 home
                     .. "/.config/hypr/scripts/find-pdfs.fish",

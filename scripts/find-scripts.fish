@@ -40,7 +40,7 @@ if not test -e $file_cache/script-files-db.txt
     notify-send -i emblem-default "Created Database" "Script files database created in .cache/find_files"
 end
 
-set -l chosen_line (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 80 --prompt="Script Files > " --placeholder=" Return Kitty | Alt+1 View only | Alt+2 Foot" < $file_cache/script-files-db.txt)
+set -l chosen_line (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 80 --prompt="Script Files > " --placeholder=" 󰌑 Kitty 󰘵 1 View only 󰘵 2 Foot" < $file_cache/script-files-db.txt)
 set -l fuzzel_status $status
 
 # on pressing Esc Fuzzel status is 2
