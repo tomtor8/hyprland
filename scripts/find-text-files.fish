@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 # add as many directories with music as you want
-set -g dirs ~/Documents /mnt/sam_ssd/docs/
+set -g dirs ~/Documents
 
 if not test -d ~/.cache/find_files
     mkdir -p ~/.cache/find_files

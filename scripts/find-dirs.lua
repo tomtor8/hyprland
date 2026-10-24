@@ -137,7 +137,7 @@ local applications = {
 }
 
 ------------------ SEARCH DIRECTORIES WITH FD ----------------------------
-local paths = { home .. "/Documents", "/mnt/sam_ssd/docs", home .. "/Pictures" }
+local paths = { home .. "/Documents", home .. "/Pictures" }
 local existing_paths = {}
 
 for _, path in ipairs(paths) do

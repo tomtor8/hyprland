@@ -1,13 +1,13 @@
 #!/usr/bin/env fish
 
 # add as many directories with music as you want
-set -g music_dirs ~/Music /mnt/sam_ssd/music
+set -g music_dirs ~/Music
 
-if not test -d ~/.cache/find_music
-    mkdir -p ~/.cache/find_music
+if not test -d ~/.cache/find_files
+    mkdir -p ~/.cache/find_files
 end
 
-set -g music_cache ~/.cache/find_music
+set -g music_cache ~/.cache/find_files
 
 function update_db
     set -l lines_for_artists_db
@@ -53,7 +53,7 @@ end
 if not test -e $music_cache/artists-db.txt
     or not test -e $music_cache/albums-db.txt
     update_db
-    notify-send -i emblem-default "Created Database" "Music database created in .cache/find_music"
+    notify-send -i emblem-default "Created Database" "Music database created in .cache/find_files"
 end
 
 # Choose category
@@ -75,7 +75,7 @@ switch $category
         set db albums-db.txt
     case Update
         update_db
-        notify-send -i emblem-default "Updated Database" "Updated music database in .cache/find_music"
+        notify-send -i emblem-default "Updated Database" "Updated music database in .cache/find_files"
         exit 0
     case '*'
         exit 0
