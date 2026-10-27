@@ -92,12 +92,38 @@ hl.gesture({
 })
 
 hl.gesture({
+    fingers = 3,
+    direction = "right",
+    action = function()
+        hl.dispatch(hl.dsp.layout("move +col"))
+    end,
+})
+
+hl.gesture({
+    fingers = 3,
+    direction = "left",
+    action = function()
+        hl.dispatch(hl.dsp.layout("move -col"))
+    end,
+})
+
+hl.gesture({
+    -- 2..9
+    fingers = 4,
+    -- up|down|left|righ
+    direction = "down",
+    action = function()
+        hl.exec_cmd("fuzzel")
+    end,
+})
+
+hl.gesture({
     -- 2..9
     fingers = 4,
     -- up|down|left|righ
     direction = "up",
     action = function()
-        hl.exec_cmd("foot")
+        hl.exec_cmd("kitty")
     end,
 })
 
