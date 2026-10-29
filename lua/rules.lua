@@ -5,45 +5,46 @@ function M.setup(cfg)
     -- e.g. cfg.scale
     -- Window and Workspace rules {{{1
     -- Scratchpad rules {{{2
-    local scratchpads = {
-        {
-            name = "yazi",
-            cmd = "foot --app-id yazi-scratch -e yazi",
-        },
-        {
-            name = "foot",
-            cmd = "foot --app-id foot-scratch",
-        },
-        {
-            name = "note",
-            cmd = "foot --app-id note-scratch -e nvim ~/Documents/notepad.md 2>/dev/null",
-        },
-        {
-            name = "music",
-            cmd = "foot --app-id music-scratch -e cmus",
-        },
-    }
 
-    for _, scratch in ipairs(scratchpads) do
-        local id = scratch.name .. "-scratch"
-        local ws = "special:" .. id .. "pad"
+    hl.window_rule({
+        match = {
+            class = "^foot-scratch$",
+        },
+        float = true,
+        size = { "(monitor_w * 0.6)", "(monitor_h * 0.7)" },
+        animation = "slide left",
+        workspace = "special:foot-scratchpad",
+    })
 
-        hl.workspace_rule({
-            workspace = ws,
-            on_created_empty = scratch.cmd,
-        })
+    hl.window_rule({
+        match = {
+            class = "^note-scratch$",
+        },
+        float = true,
+        size = { "(monitor_w * 0.6)", "(monitor_h * 0.7)" },
+        animation = "slide left",
+        workspace = "special:note-scratchpad",
+    })
 
-        hl.window_rule({
-            name = id,
-            match = {
-                class = "^" .. id .. "$",
-            },
-            float = true,
-            size = { "(monitor_w * 0.6)", "(monitor_h * 0.7)" },
-            animation = "slide left",
-            workspace = "^" .. ws .. "$",
-        })
-    end
+    hl.window_rule({
+        match = {
+            class = "^yazi-scratch$",
+        },
+        float = true,
+        size = { "(monitor_w * 0.6)", "(monitor_h * 0.7)" },
+        animation = "slide left",
+        workspace = "special:yazi-scratchpad",
+    })
+
+    hl.window_rule({
+        match = {
+            class = "^kew$",
+        },
+        float = true,
+        size = { "(monitor_w * 0.3)", "(monitor_h * 0.7)" },
+        animation = "slide left",
+        workspace = "special:music-scratchpad",
+    })
 
     -- Application rules {{{2
     hl.window_rule({
@@ -81,14 +82,6 @@ function M.setup(cfg)
         center = true
     })
 
-    -- hl.window_rule({
-    --     match = {
-    --         class = "^kew$",
-    --     },
-    --     float = true,
-    --     workspace = "4 silent",
-    --     size = { "(monitor_w * 0.3)", "(monitor_h * 0.8)" },
-    -- })
 
     -- Hyprland window rules {{{2
     hl.window_rule({

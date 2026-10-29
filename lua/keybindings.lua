@@ -304,23 +304,30 @@ function M.setup(cfg)
     hl.bind(mainMod .. " + SHIFT + bracketright", hl.dsp.layout("swapcol r"))
 
     -- Scratchpads: Special Workspaces {{{1
-    hl.bind(
-        mainMod .. " + ALT + E",
-        hl.dsp.workspace.toggle_special("yazi-scratchpad"),
-        { description = "Open Foot Scratchpad" }
-    )
 
-    hl.bind(
-        mainMod .. " + ALT + Return",
-        hl.dsp.workspace.toggle_special("foot-scratchpad"),
-        { description = "Open Foot Scratchpad" }
-    )
+    hl.bind(mainMod .. " + ALT + E", function()
+        if hl.get_window("class:yazi-scratch") then
+            hl.dispatch(hl.dsp.workspace.toggle_special("yazi-scratchpad"))
+        else
+            hl.dispatch(hl.dsp.exec_cmd("foot --app-id yazi-scratch -e yazi"))
+        end
+    end, {description = "Open Yazi Scratchpad"})
 
-    hl.bind(
-        mainMod .. " + ALT + N",
-        hl.dsp.workspace.toggle_special("note-scratchpad"),
-        { description = "Open Note Scratchpad" }
-    )
+    hl.bind(mainMod .. " + ALT + Return", function()
+        if hl.get_window("class:foot-scratch") then
+            hl.dispatch(hl.dsp.workspace.toggle_special("foot-scratchpad"))
+        else
+            hl.dispatch(hl.dsp.exec_cmd("foot --app-id foot-scratch"))
+        end
+    end, {description = "Open Foot Scratchpad"})
+
+    hl.bind(mainMod .. " + ALT + N", function()
+        if hl.get_window("class:note-scratch") then
+            hl.dispatch(hl.dsp.workspace.toggle_special("note-scratchpad"))
+        else
+            hl.dispatch(hl.dsp.exec_cmd("foot --app-id note-scratch -e nvim ~/Documents/scratch/scratchpad.md 2>/dev/null"))
+        end
+    end, {description = "Open Note Scratchpad"})
 
     hl.bind(
         mainMod .. " + ALT + M",
@@ -465,23 +472,19 @@ function M.setup(cfg)
     hl.define_submap("scripts", "reset", function()
         local t = {
             ["d"] = {
-                home
-                    .. "/.config/hypr/scripts/find-dirs.fish",
+                home .. "/.config/hypr/scripts/find-dirs.fish",
                 "Find Directory",
             },
             ["p"] = {
-                home
-                    .. "/.config/hypr/scripts/find-pdfs.fish",
+                home .. "/.config/hypr/scripts/find-pdfs.fish",
                 "Find PDF files",
             },
             ["s"] = {
-                home
-                    .. "/.config/hypr/scripts/find-scripts.fish",
+                home .. "/.config/hypr/scripts/find-scripts.fish",
                 "Find script files",
             },
             ["t"] = {
-                home
-                    .. "/.config/hypr/scripts/find-text-files.fish",
+                home .. "/.config/hypr/scripts/find-text-files.fish",
                 "Find text files",
             },
         }

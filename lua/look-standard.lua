@@ -20,7 +20,7 @@ function M.setup(cfg)
             inactive_opacity = 1.0,
             dim_inactive = false,
             dim_strength = 0.4,
-            dim_special = 0.4,
+            dim_special = 0.6,
             shadow = {
                 enabled = true,
                 range = 25,
