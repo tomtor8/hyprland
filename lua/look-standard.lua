@@ -50,9 +50,10 @@ function M.setup(cfg)
                 font_weight_active = "bold",
                 rounding = cfg.corner_radius,
                 round_only_edges = false,
-                indicator_height = 16,
-                indicator_gap = -15,
+                indicator_height = 14,
+                indicator_gap = 0,
                 blur = false,
+                text_offset = -14
             },
         },
     })
