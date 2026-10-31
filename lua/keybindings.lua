@@ -169,7 +169,7 @@ function M.setup(cfg)
     hl.bind(mainMod .. " + A", function()
         hl.dispatch(
             hl.dsp.exec_cmd(
-                [[notify-send -i dialog-information -t 20000 "Active WS Layouts" "d - Dwindle\nm - Master\no - Monocle\ns - Scrolling"]]
+                [[notify-send -i dialog-information -t 5000 "Active WS Layouts" "d - Dwindle\nm - Master\no - Monocle\ns - Scrolling"]]
             )
         )
         hl.dispatch(hl.dsp.submap("active_ws_layouts"))
@@ -311,7 +311,7 @@ function M.setup(cfg)
         else
             hl.dispatch(hl.dsp.exec_cmd("foot --app-id yazi-scratch -e yazi"))
         end
-    end, {description = "Open Yazi Scratchpad"})
+    end, { description = "Open Yazi Scratchpad" })
 
     hl.bind(mainMod .. " + ALT + Return", function()
         if hl.get_window("class:foot-scratch") then
@@ -319,15 +319,19 @@ function M.setup(cfg)
         else
             hl.dispatch(hl.dsp.exec_cmd("foot --app-id foot-scratch"))
         end
-    end, {description = "Open Foot Scratchpad"})
+    end, { description = "Open Foot Scratchpad" })
 
     hl.bind(mainMod .. " + ALT + N", function()
         if hl.get_window("class:note-scratch") then
             hl.dispatch(hl.dsp.workspace.toggle_special("note-scratchpad"))
         else
-            hl.dispatch(hl.dsp.exec_cmd("foot --app-id note-scratch -e nvim ~/Documents/scratch/scratchpad.md 2>/dev/null"))
+            hl.dispatch(
+                hl.dsp.exec_cmd(
+                    "foot --app-id note-scratch -e nvim ~/Documents/scratch/scratchpad.md 2>/dev/null"
+                )
+            )
         end
-    end, {description = "Open Note Scratchpad"})
+    end, { description = "Open Note Scratchpad" })
 
     hl.bind(mainMod .. " + ALT + B", function()
         if hl.get_window("class:btop-scratch") then
@@ -335,7 +339,7 @@ function M.setup(cfg)
         else
             hl.dispatch(hl.dsp.exec_cmd("foot --app-id btop-scratch -e btop"))
         end
-    end, {description = "Open Btop Scratchpad"})
+    end, { description = "Open Btop Scratchpad" })
 
     hl.bind(
         mainMod .. " + ALT + M",
@@ -443,7 +447,7 @@ function M.setup(cfg)
     hl.bind(mainMod .. " + R", function()
         hl.dispatch(
             hl.dsp.exec_cmd(
-                [[notify-send -i dialog-information -t 20000 "Resize Window" "h - Left\nj - Down\nk - Up\nl - Right\nEsc - Cancel"]]
+                [[notify-send -i dialog-information -t 5000 "Resize Window" "h - Left\nj - Down\nk - Up\nl - Right\ni - Expand\nu - Shrink\nEsc - Cancel"]]
             )
         )
         hl.dispatch(hl.dsp.submap("resize"))
@@ -454,10 +458,12 @@ function M.setup(cfg)
         -- Set repeating binds for resizing the active window.
         local t = {
             -- key: keybind, values: x and y
-            ["l"] = { 10, 0 },
-            ["h"] = { -10, 0 },
-            ["j"] = { 0, 10 },
-            ["k"] = { 0, -10 },
+            ["l"] = { 40, 0 },
+            ["i"] = { 40, 40 },
+            ["u"] = { -40, -40 },
+            ["h"] = { -40, 0 },
+            ["j"] = { 0, 40 },
+            ["k"] = { 0, -40 },
         }
 
         for k, v in pairs(t) do
@@ -512,7 +518,7 @@ function M.setup(cfg)
     hl.bind(mainMod .. " + S", function()
         hl.dispatch(
             hl.dsp.exec_cmd(
-                [[notify-send -i dialog-information -t 20000 "Screenshot" "f - Fullscreen\nl - OCR Keep Lines\no - OCR No Lines\nr - Region"]]
+                [[notify-send -i dialog-information -t 5000 "Screenshot" "f - Fullscreen\nl - OCR Keep Lines\no - OCR No Lines\nr - Region"]]
             )
         )
         hl.dispatch(hl.dsp.submap("screenshots"))
@@ -553,7 +559,7 @@ function M.setup(cfg)
     hl.bind(mainMod .. " + T", function()
         hl.dispatch(
             hl.dsp.exec_cmd(
-                [[notify-send -i dialog-information -t 20000 "Toggles" "b - Status Bar\nd - Dwindle Togglesplit\nf - Float\ng - Group\nl - Group Lock\nm - Maximize\np - Pseudotile\ns - fullscreen"]]
+                [[notify-send -i dialog-information -t 5000 "Toggles" "b - Status Bar\nd - Dwindle Togglesplit\nf - Float\ng - Group\nl - Group Lock\nm - Maximize\np - Pseudotile\ns - fullscreen"]]
             )
         )
         hl.dispatch(hl.dsp.submap("toggles"))
@@ -600,11 +606,11 @@ function M.setup(cfg)
     -- Resize and Float Windows Submaps {{{1
     -- Making Floating Windows and Resizing them
     hl.bind(mainMod .. " + F", function()
-        hl.dispatch(
-            hl.dsp.exec_cmd(
-                [[notify-send -i dialog-information -t 20000 "Floating Window Sizes" "1 - 50x60\n2 - 60x70\n3 - 70x80\n4 - 80x90\n5 - 90x90\n6 - 50x93"]]
-            )
-        )
+        -- hl.dispatch(
+        --     hl.dsp.exec_cmd(
+        --         [[notify-send -i dialog-information -t 5000 "Floating Window Sizes" "1 - 50x60\n2 - 60x70\n3 - 70x80\n4 - 80x90\n5 - 90x90\n6 - 50x93"]]
+        --     )
+        -- )
         hl.dispatch(hl.dsp.submap("float_windows"))
     end, { description = "Float and Resize" })
     -- automatically reset the submap using "reset" here
