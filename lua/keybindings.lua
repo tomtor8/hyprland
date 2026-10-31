@@ -329,6 +329,14 @@ function M.setup(cfg)
         end
     end, {description = "Open Note Scratchpad"})
 
+    hl.bind(mainMod .. " + ALT + B", function()
+        if hl.get_window("class:btop-scratch") then
+            hl.dispatch(hl.dsp.workspace.toggle_special("btop-scratchpad"))
+        else
+            hl.dispatch(hl.dsp.exec_cmd("foot --app-id btop-scratch -e btop"))
+        end
+    end, {description = "Open Btop Scratchpad"})
+
     hl.bind(
         mainMod .. " + ALT + M",
         hl.dsp.workspace.toggle_special("music-scratchpad"),

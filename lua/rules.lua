@@ -38,6 +38,16 @@ function M.setup(cfg)
 
     hl.window_rule({
         match = {
+            class = "^btop-scratch$",
+        },
+        float = true,
+        size = { "(monitor_w * 0.9)", "(monitor_h * 0.9)" },
+        animation = "slide left",
+        workspace = "special:btop-scratchpad",
+    })
+
+    hl.window_rule({
+        match = {
             class = "^kew$",
         },
         float = true,
@@ -57,7 +67,7 @@ function M.setup(cfg)
 
     hl.window_rule({
         match = {
-            class = "^(io.github.cboxdoerfer.FSearch|foot-snip|org.gnome.Nautilus|yazi)$",
+            class = "^(io.github.cboxdoerfer.FSearch|foot-snip|org.gnome.Nautilus|yazi|io.github.lgse.Strata)$",
         },
         float = true,
         size = { "(monitor_w * 0.5)", "(monitor_h * 0.6)" },
