@@ -305,6 +305,14 @@ function M.setup(cfg)
 
     -- Scratchpads: Special Workspaces {{{1
 
+    -- move any window to scratchpad magic
+    hl.bind(
+        mainMod .. " + SHIFT + S",
+        hl.dsp.window.move({ workspace = "special:magic", follow = false })
+    )
+    -- Show/hide the workspace, and any windows on it:
+    hl.bind(mainMod .. " + ALT + S", hl.dsp.workspace.toggle_special("magic"))
+
     hl.bind(mainMod .. " + ALT + E", function()
         if hl.get_window("class:yazi-scratch") then
             hl.dispatch(hl.dsp.workspace.toggle_special("yazi-scratchpad"))
