@@ -34,17 +34,17 @@ function update_db --inherit-variable query_dirs --inherit-variable dir_cache
         end
     end
     set -a lines_for_dirs_db "Update:Update Database"
-    printf '%s\n' $lines_for_dirs_db >$dir_cache/dirs-db.txt
+    printf '%s\n' $lines_for_dirs_db >"$dir_cache/dirs-db.txt"
     # sort file in place based on the second field separated by :
-    sort --field-separator : --key 2 --output $dir_cache/dirs-db.txt $dir_cache/dirs-db.txt
+    sort --field-separator : --key 2 --output "$dir_cache/dirs-db.txt" "$dir_cache/dirs-db.txt"
 end
 
-if not test -e $dir_cache/dirs-db.txt
+if not test -e "$dir_cache/dirs-db.txt"
     update_db
     notify-send -i emblem-default "Created Database" "Directory database created in .cache/find_files"
 end
 
-set chosen_line (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 60 --prompt="$prompt" --placeholder=" 󰌑 Strata 󰘵 1 Yazi 󰘵 2 Kitty 󰘵 3 Zen 󰘵 4 Imv" < $dir_cache/dirs-db.txt)
+set chosen_line (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 60 --prompt="$prompt" --placeholder=" 󰌑 Strata 󰘵 1 Yazi 󰘵 2 Kitty 󰘵 3 Zen 󰘵 4 Imv" < "$dir_cache/dirs-db.txt")
 set -l fuzzel_status $status
 
 # on pressing Esc Fuzzel status is 2
@@ -60,19 +60,19 @@ end
 # $status 10 Alt+1 plays in amberol; $11 Alt+2 eartag
 switch $fuzzel_status
     case 0
-        strata $chosen_line &
+        strata "$chosen_line" &
         disown
     case 10
-        kitty --app-id yazi-dir -e yazi $chosen_line &
+        kitty --app-id yazi -e yazi "$chosen_line" &
         disown
     case 11
-        kitty --app-id kitty-editor -e nvim $chosen_line &
+        kitty --app-id kitty-editor -e nvim "$chosen_line" &
         disown
     case 12
-        zen --new-tab $chosen_line &
+        zen --new-tab "$chosen_line" &
         disown
     case 13
-        imv $chosen_line &
+        imv "$chosen_line" &
         disown
     case '*'
         exit 0
