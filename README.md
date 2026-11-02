@@ -7,6 +7,11 @@
 
 ## Scripts
 
+## Fish Scripts
+
+- a couple of important Fish scripts are located in my `fish` repository
+- clone the repository to `~/Projects/fish` for Hyprland keybindings to work
+
 ### Find Music Fish Script
 
 You can add as many music directories as you wish to `music_dirs` variable at the beginning of the script.
