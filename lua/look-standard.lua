@@ -45,15 +45,20 @@ function M.setup(cfg)
         group = {
             groupbar = {
                 enabled = true,
+                gradients = true,
+                gradient_round_only_edges = false,
+                gradient_rounding_power = 4.0,
+                gradient_rounding = 20,
                 font_family = "Lexend",
                 font_size = 14,
                 font_weight_active = "bold",
                 rounding = cfg.corner_radius,
                 round_only_edges = false,
-                indicator_height = 14,
+                indicator_height = 0,
                 indicator_gap = 0,
                 blur = false,
-                text_offset = -14
+                height = 18,
+                keep_upper_gap = true
             },
         },
     })
