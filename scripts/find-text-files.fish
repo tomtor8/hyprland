@@ -40,7 +40,7 @@ if not test -e $file_cache/text-files-db.txt
     notify-send -i emblem-default "Created Database" "Text files database created in .cache/find_files"
 end
 
-set -l chosen_line (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 80 --prompt="Text Files > " --placeholder=" 󰌑 Kitty 󰘵 1 View only 󰘵 2 Foot" < $file_cache/text-files-db.txt)
+set -l chosen_line (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --accept-nth 1 --width 80 --prompt="Text Files > " --placeholder=" 󰌑 Kitty 󰘵 1 View only 󰘵 2 Foot 󰘵 3 Zen" < $file_cache/text-files-db.txt)
 set -l fuzzel_status $status
 
 # on pressing Esc Fuzzel status is 2
@@ -66,6 +66,9 @@ switch $fuzzel_status
         disown
     case 11
         foot --app-id foot-editor -e nvim $chosen_line &
+        disown
+    case 12
+        zen --new-tab $chosen_line &
         disown
     case '*'
         exit 0
