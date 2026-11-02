@@ -54,11 +54,6 @@ function M.setup(cfg)
         { description = "File and Folder Search" }
     )
     hl.bind(
-        mainMod .. " + M",
-        hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/find-music.fish"),
-        { description = "Select Music in Fuzzel" }
-    )
-    hl.bind(
         mainMod .. " + C",
         hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/color-picker-hypr.lua"),
         { description = "Color Picker in Fuzzel" }
@@ -496,6 +491,10 @@ function M.setup(cfg)
             ["d"] = {
                 home .. "/Projects/fish/find_files/find-dirs.fish",
                 "Find Directory",
+            },
+            ["m"] = {
+                home .. "/Projects/fish/find_files/find-music.fish",
+                "Find music files",
             },
             ["p"] = {
                 home .. "/Projects/fish/find_files/find-pdfs.fish",
