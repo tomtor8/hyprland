@@ -494,19 +494,19 @@ function M.setup(cfg)
     hl.define_submap("scripts", "reset", function()
         local t = {
             ["d"] = {
-                home .. "/.config/hypr/scripts/find-dirs.fish",
+                home .. "/Projects/fish/find_files/find-dirs.fish",
                 "Find Directory",
             },
             ["p"] = {
-                home .. "/.config/hypr/scripts/find-pdfs.fish",
+                home .. "/Projects/fish/find_files/find-pdfs.fish",
                 "Find PDF files",
             },
             ["s"] = {
-                home .. "/.config/hypr/scripts/find-scripts.fish",
+                home .. "/Projects/fish/find_files/find-scripts.fish",
                 "Find script files",
             },
             ["t"] = {
-                home .. "/.config/hypr/scripts/find-text-files.fish",
+                home .. "/Projects/fish/find_files/find-text-files.fish",
                 "Find text files",
             },
         }
@@ -542,12 +542,12 @@ function M.setup(cfg)
             },
             ["o"] = {
                 home
-                    .. "/.config/hypr/scripts/ocr-screenshot-in-clipboard.fish --strip-newlines",
+                    .. "/Projects/fish/ocr_scripts/ocr-screenshot-in-clipboard.fish --strip-newlines",
                 "Screenshot to OCR Without Lines",
             },
             ["l"] = {
                 home
-                    .. "/.config/hypr/scripts/ocr-screenshot-in-clipboard.fish",
+                    .. "/Projects/fish/ocr_scripts/ocr-screenshot-in-clipboard.fish",
                 "Screenshots to OCR Lines Preserved",
             },
         }

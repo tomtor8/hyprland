@@ -59,7 +59,7 @@ local commands = {
     { "󰂯  Bluetooth Toggle", "noctalia msg bluetooth-toggle" },
     {
         "  Check Git Remote Repos",
-        [[hyprctl dispatch 'hl.dsp.exec_cmd("~/.config/hypr/scripts/check-git-repos.fish")']],
+        [[hyprctl dispatch 'hl.dsp.exec_cmd("~/Projects/fish/git_scripts/check-git-repos.fish")']],
     },
     {
         "  Control Center Home",
