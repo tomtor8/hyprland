@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-# add as many directories as you want::separated by replacements for FUZZEL
+# add as many directories as you want, separated by : replacements for FUZZEL
 set -l query_dirs $HOME/Documents:DOCS $HOME/Pictures:PICS \
     $HOME/Code:CODE $HOME/Projects:PROJECTS $HOME/.config/nvim:NVIM \
     $HOME/.local/share/snippets:SNIPPETS $HOME/.config/hypr:HYPR \
@@ -48,17 +48,13 @@ set chosen_line (fuzzel --dmenu --counter --nth-delimiter=":" --with-nth 2 --acc
 set -l fuzzel_status $status
 
 # on pressing Esc Fuzzel status is 2
-if test $fuzzel_status -eq 2
-    exit 0
-end
+test $fuzzel_status -eq 2; and exit 0
 
 if test "$chosen_line" = Update
     update_db
     notify-send -i emblem-default "Updated Database" "Directory database updated in .cache/find_files"
     exit 0
 end
-
-# set -l command_args
 
 # $status 2 means fuzzel was exited using Esc, $status 0 Return fuzzel value
 # $status 10 Alt+1 plays in amberol; $11 Alt+2 eartag
