@@ -48,11 +48,11 @@ function M.setup(cfg)
         ),
         { description = "Hyprland Command Palette" }
     )
-    hl.bind(
-        "CTRL + Space",
-        hl.dsp.exec_cmd("fsearch"),
-        { description = "File and Folder Search" }
-    )
+    -- hl.bind(
+    --     "CTRL + Space",
+    --     hl.dsp.exec_cmd("fsearch"),
+    --     { description = "File and Folder Search" }
+    -- )
     hl.bind(
         mainMod .. " + C",
         hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/color-picker-hypr.lua"),
@@ -91,11 +91,11 @@ function M.setup(cfg)
         hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"),
         { description = "Noctalia Launcher" }
     )
-    -- hl.bind(
-    --     "CTRL + Space",
-    --     hl.dsp.exec_cmd(ipc .. "panel-toggle nightwatch75/file-search:panel"),
-    --     { description = "File Search in Noctalia" }
-    -- )
+    hl.bind(
+        "CTRL + Space",
+        hl.dsp.exec_cmd(ipc .. "panel-toggle nightwatch75/file-search:panel"),
+        { description = "File Search in Noctalia" }
+    )
     hl.bind(
         mainMod .. " + V",
         hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"),
