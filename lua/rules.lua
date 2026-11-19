@@ -84,7 +84,7 @@ function M.setup(cfg)
 
     hl.window_rule({
         match = {
-            class = "xdg-desktop-portal-gtk",
+            class = "^(xdg-desktop-portal-gtk|io.github.lgse.Strata.FileChooser)$",
             -- initial_title = "^(Open Folder|Open File|All Files|Open Files)$",
         },
         float = true,
