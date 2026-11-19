@@ -72,7 +72,7 @@ hl.config({
         kb_model = "",
         kb_options = "grp:shifts_toggle,caps:escape",
         kb_rules = "",
-        follow_mouse = 0,
+        follow_mouse = 1,
         sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
         touchpad = {
             natural_scroll = true,
