@@ -72,9 +72,7 @@ function M.setup(cfg)
     )
     hl.bind(
         mainMod .. " + X",
-        hl.dsp.exec_cmd(
-            home .. "/.config/hypr/scripts/powermenu-hypr-noctalia.lua"
-        ),
+        hl.dsp.exec_cmd("noctalia msg panel-toggle session"),
         { description = "PowerMenu in Fuzzel" }
     )
     hl.bind(
