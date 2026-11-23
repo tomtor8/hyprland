@@ -67,7 +67,7 @@ function M.setup(cfg)
 
     hl.window_rule({
         match = {
-            class = "^(io.github.cboxdoerfer.FSearch|foot-snip|org.gnome.Nautilus|yazi|io.github.lgse.Strata)$",
+            class = "^(io.github.cboxdoerfer.FSearch|foot-snip|yazi)$",
         },
         float = true,
         size = { "(monitor_w * 0.5)", "(monitor_h * 0.6)" },
