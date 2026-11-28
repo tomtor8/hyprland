@@ -64,23 +64,9 @@ function M.setup(cfg)
         { description = "Buku Web Bookmarks in Fuzzel" }
     )
     hl.bind(
-        mainMod .. " + O",
-        hl.dsp.exec_cmd(
-            home .. "/.local/share/snippets/scripts/one-liner-to-fuzzel.fish"
-        ),
-        { description = "One-liners" }
-    )
-    hl.bind(
         mainMod .. " + X",
         hl.dsp.exec_cmd("noctalia msg panel-toggle session"),
         { description = "PowerMenu in Fuzzel" }
-    )
-    hl.bind(
-        mainMod .. " + Z",
-        hl.dsp.exec_cmd(
-            home .. "/.local/share/snippets/scripts/snip-to-fuzzel.fish"
-        ),
-        { description = "Snippets" }
     )
 
     -- Noctalia Keybindings {{{1
@@ -505,6 +491,15 @@ function M.setup(cfg)
             ["t"] = {
                 home .. "/Projects/fish/find_files/find-text-files.fish",
                 "Find text files",
+            },
+            ["o"] = {
+                home
+                    .. "/.local/share/snippets/scripts/one-liner-to-fuzzel.fish",
+                "Oneliners",
+            },
+            ["z"] = {
+                home .. "/.local/share/snippets/scripts/snip-to-fuzzel.fish",
+                "Snippets",
             },
         }
 
